@@ -33,12 +33,12 @@ const Navbar = () => {
         {/* Brand */}
         <Link to="/" className="flex items-center">
           <img
-            className="w-20 h-20"
+            className="w-8 h-8 lg:w-20 lg:h-20"
             src="https://www.lus.ac.bd/wp-content/themes/lu-main/img/logo-white.png"
             alt="leading university"
           />
           <img
-            className="h-16 pt-2"
+            className="h-7 lg:h-16 pt-1"
             src="https://www.lus.ac.bd/wp-content/themes/lu-main/img/label-white.png"
             alt="promise to leave"
           />

@@ -38,7 +38,7 @@ const Banner = () => {
     // Initial animation
     gsap.fromTo(
       imageRefs.current[0],
-      { scale: 1.08},
+      { scale: 1.08 },
       {
         scale: 1,
         opacity: 1,
@@ -49,7 +49,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="h-[85vh] bg-black text-white relative overflow-hidden">
+    <div className="relative bg-black text-white overflow-hidden">
       <Swiper
         effect="fade"
         pagination={{ dynamicBullets: true }}
@@ -59,7 +59,7 @@ const Banner = () => {
         }}
         onSlideChange={handleSlideChange}
         modules={[Autoplay, EffectFade]}
-        className="w-full h-full"
+        className="w-full h-[70vh] sm:h-[80vh] md:h-[85vh] lg:h-[90vh]"
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
