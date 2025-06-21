@@ -9,8 +9,8 @@ import gsap from 'gsap';
 const Banner = () => {
   const images = [
     'https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2024/09/LU-Photo-scaled.jpg?fit=2560%2C1895&ssl=1',
-    'https://scontent.fzyl5-1.fna.fbcdn.net/v/t39.30808-6/464962611_3606052286207513_8114212752889115795_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=US8dDojNlq4Q7kNvwE7wBLP&_nc_oc=AdmFuOwCe9U5oZ8Gtq-OcpEb8IazPJL1VLm_J5YFH-SOckCWcqLj0R0R_bgIO5xMSnhOkXk9oftJif31o45mzQqi&_nc_zt=23&_nc_ht=scontent.fzyl5-1.fna&_nc_gid=0KlmTD8o3Tq17wOUH1G2wQ&oh=00_AfMlGDVx4dSkBUNSvL3KgSUd-66q-oy86AMypb83lghPNQ&oe=685B6808',
-    'http://163.47.39.187/RKCCL/assets/img/slider/slide3.jpg',
+    'https://scontent.fzyl5-1.fna.fbcdn.net/v/t39.30808-6/464962611_3606052286207513_8114212752889115795_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=t_5Ui8aOueQQ7kNvwHkjVp6&_nc_oc=Adl1o0KHHuAragGCJNUzMuT1lPOKYJX6iAOzmtad6lhtURkqrneTtdiDPw9uSSwiSTcXD4tBUL99yVNb8ItAsXCH&_nc_zt=23&_nc_ht=scontent.fzyl5-1.fna&_nc_gid=uteImM8K5wglRVkkjaqa2Q&oh=00_AfNv2MF_AZfTwGvlzj9twXLt8GY-fjYHM2ja1PegitnCvw&oe=685C4908',
+    'https://scontent.fzyl5-2.fna.fbcdn.net/v/t39.30808-6/464969641_3606052282874180_6955086707983369485_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=J3UTMQxWWsQQ7kNvwFGH6r9&_nc_oc=AdlkqxmtJwyLYJOXxVfIB9wlyWc4iFnqmW8MKxUl_q5gGbWhKBEx4UHvKljcOVwrHe59Lx8Siv69J_0R6lUbzCRf&_nc_zt=23&_nc_ht=scontent.fzyl5-2.fna&_nc_gid=tl_6T0lUPUkvIxzzNgZZMg&oh=00_AfPFY3tBjbGEktFwkuR9io4QYArodaIdvPo0QJn-oH2lAw&oe=685C4633',
   ];
 
   const imageRefs = useRef([]);
