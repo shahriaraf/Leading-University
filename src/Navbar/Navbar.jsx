@@ -25,9 +25,8 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#455A64] shadow-md' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#455A64] shadow-md' : 'bg-transparent'
+        }`}
     >
       <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Brand */}
@@ -56,6 +55,9 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          <Link to={'/login'}>
+            <button className='btn text-[#455A64] px-4 py-2 rounded-2xl bg-white'>Login</button>
+          </Link>
         </ul>
 
         {/* Mobile Menu Toggle */}

@@ -1,10 +1,13 @@
-import React from 'react';
+import './login.css'
 
 const Login = () => {
     return (
-        <div>
-            <h1 className='text-2xl'>Hlw</h1>
+        <div className="loginbg">
+            <div style={{ position: "relative", zIndex: 3 }}>
+                {/* Your login form goes here */}
+            </div>
         </div>
+
     );
 };
 
