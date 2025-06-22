@@ -41,7 +41,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            
             <div
                 className="relative h-screen bg-fixed bg-center bg-cover"
                 style={{ backgroundImage: "url('https://unicamp.thememove.com/main/wp-content/uploads/sites/2/2021/04/home-04-program-section-bg.jpg')" }}
