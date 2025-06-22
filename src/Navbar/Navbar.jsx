@@ -37,7 +37,7 @@ const Navbar = () => {
             alt="leading university"
           />
           <img
-            className="h-8 lg:h-14 pt-1"
+            className="h-8 lg:h-12"
             src="https://www.lus.ac.bd/wp-content/themes/lu-main/img/label-white.png"
             alt="promise to leave"
           />

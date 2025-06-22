@@ -15,11 +15,11 @@ const Home = () => {
                     {/* Left Content */}
                     <div className="bg-[#e3e3e3] shadow-md p-14 max-w-xl w-full lg:absolute left-40">
                         <h2 className="text-3xl font-semibold mb-4">
-                            UniCamp Open Day
+                            Leading Open Day
                         </h2>
                         <div className="w-18 h-1 bg-[#455A64] mb-6" />
                         <p className="text-gray-700 text-lg mb-8">
-                            Discover what studying at UniCamp is really like. Explore our campuses and find out more about our admission process and get to know our community.
+                            Discover what studying at Leading University is really like. Explore our campus and find out more about our admission process and get to know our community.
                         </p>
 
                         <motion.button
@@ -41,6 +41,35 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            <div
+                className="relative h-screen bg-fixed bg-center bg-cover"
+                style={{ backgroundImage: "url('https://unicamp.thememove.com/main/wp-content/uploads/sites/2/2021/04/home-04-program-section-bg.jpg')" }}
+            >
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-20 text-white max-w-4xl">
+                    <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-4">
+                        Explore Majors &amp;<br />
+                        Programs
+                    </h1>
+                    <p className="text-lg md:text-xl mb-6">
+                        Choose from 16 undergraduate and graduate majors
+                    </p>
+                    <button className="bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-3 rounded shadow inline-flex items-center w-max">
+                        View all programs
+                        <svg
+                            className="ml-2 w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+
             <section className="py-16 bg-white px-4">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-center">
                     {[
