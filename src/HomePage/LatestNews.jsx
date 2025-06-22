@@ -1,6 +1,6 @@
-import React from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination,Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -49,7 +49,7 @@ const LatestNews = () => {
           spaceBetween={20}
           freeMode={true}
           pagination={{ clickable: true }}
-          modules={[Pagination, Autoplay]}
+          modules={[ Autoplay]}
           className="w-full"
           breakpoints={{
             640: { slidesPerView: 1.2 },

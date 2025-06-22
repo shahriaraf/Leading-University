@@ -9,40 +9,29 @@ import 'swiper/css/pagination';
 const events = [
   {
     title: 'Tech Fest 2025',
-    image: 'https://source.unsplash.com/400x300/?technology,festival',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu-HsMORSu0l3xMnXyk73uzsJqAdlbZyt9hA&s',
   },
   {
     title: 'CSE Carnival',
-    image: 'https://source.unsplash.com/400x300/?computer,students',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9yUOg3VFWCsBwDGv7vJW3yYEGjjjDPg0zow&s',
   },
   {
     title: 'Project Showdown',
-    image: 'https://source.unsplash.com/400x300/?presentation,project',
+    image: 'https://media.licdn.com/dms/image/v2/C560BAQHgrN0SvSwb8g/company-logo_200_200/company-logo_200_200/0/1630630928240?e=2147483647&v=beta&t=MNYLsyFTnWe7QO_AAlhihdKdJ252WEAOZKTuAJoAj-k',
   },
   {
     title: 'Robotics Workshop',
-    image: 'https://source.unsplash.com/400x300/?robotics,university',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbDK6l0vR0aPcV47T3iVBXj0dC-rmllPj3EQ&s',
   },
   {
     title: 'Career Fair',
-    image: 'https://source.unsplash.com/400x300/?career,fair',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRQdGmVpF_xgg7fU1L7rP4MMxnEQFv58_YYQ&s',
   },
   {
     title: 'Hackathon 2025',
-    image: 'https://source.unsplash.com/400x300/?hackathon,coding',
+    image: 'https://i.ytimg.com/vi/VGJOvwgMXTw/maxresdefault.jpg',
   },
-  {
-    title: 'AI Seminar',
-    image: 'https://source.unsplash.com/400x300/?ai,seminar',
-  },
-  {
-    title: 'Startup Meetup',
-    image: 'https://source.unsplash.com/400x300/?startup,meetup',
-  },
-  {
-    title: 'Cultural Night',
-    image: 'https://source.unsplash.com/400x300/?cultural,event',
-  }
+
 ];
 
 export default function Events() {
@@ -62,7 +51,7 @@ export default function Events() {
               <img
                 src={event.image}
                 alt={event.title}
-                className="h-40 w-full object-cover"
+                className="h-64 w-full object-cover"
               />
               <div className="p-4 text-center font-semibold">{event.title}</div>
             </div>
