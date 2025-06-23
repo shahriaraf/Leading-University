@@ -1,6 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './HomePage/Home';
 import Navbar from './Navbar/Navbar';
+import Result from './Result/Result';
+
 import Login from './Login/Login';
 import Footer from './Footer/Footer'; // if you have a Footer component
 
@@ -17,6 +19,8 @@ const App = () => {
       {shouldShowLayout && <Navbar />}
 
       <Routes>
+        <Route path="/" element={<Home></Home>} />
+        <Route path="/result" element={<Result></Result>}/>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
       </Routes>
