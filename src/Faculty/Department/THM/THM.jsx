@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import FacultyCard from '../../FacultyCard/facultyCard'
 
 const THM = () => {
+    const [teachers, setTeacher] = useState([]);
+
+    useEffect(() => {
+        fetch('/faculty_thm.json')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setTeacher(data)
+
+            })
+    }, [])
     return (
         <div>
-            thm
+
+            <p className="font-bold text-gray-700 mb-6">Faculty({teachers.length})</p>
+
+            <div className="flex flex-wrap gap-3">
+                {
+                    teachers.map(teacher => <FacultyCard teacher={teacher}></FacultyCard>)
+                }
+            </div>
+
         </div>
     );
 };
