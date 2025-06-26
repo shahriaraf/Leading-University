@@ -5,7 +5,7 @@ const Civil = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_civil.json')
+        fetch('http://localhost:5000/teachers/Civil%20Engineering')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

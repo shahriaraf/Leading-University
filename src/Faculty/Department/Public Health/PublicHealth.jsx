@@ -5,7 +5,7 @@ const PublicHealth = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_publicHealth.json')
+        fetch('http://localhost:5000/teachers/Public%20Health')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

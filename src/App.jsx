@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
+// Pages & Components
 import Home from './HomePage/Home';
 import Navbar from './Navbar/Navbar';
 import Result from './Result/Result';
@@ -8,6 +9,7 @@ import Login from './Login/Login';
 import Footer from './Footer/Footer';
 import Faculty from './Faculty/Faculty';
 import PageWrapper from './component/PageWrapper/PageWrapper';
+import FacultyDetails from './Faculty/FacultyDetail/FacultyDetails';
 
 // Faculty Departments
 import CSE from './Faculty/Department/CSE/CSE';
@@ -24,24 +26,22 @@ import Architecture from './Faculty/Department/Architecture/Architecture';
 const App = () => {
   const location = useLocation();
 
-  // Hide layout on login and all faculty-related routes
-  const noLayoutPaths = ['/login', '/faculty'];
-  const shouldShowLayout = !noLayoutPaths.some(path =>
-    location.pathname.startsWith(path)
-  );
+  // Hide layout on login and exact /faculty (but allow layout for nested like /faculty/cse)
+  const noLayoutRoutes = ['/login'];
+  const shouldShowLayout = !noLayoutRoutes.includes(location.pathname);
 
   return (
     <AnimatePresence mode="wait">
       <div>
-        {/* ✅ Conditionally render Navbar */}
+        {/* ✅ Navbar only if allowed */}
         {shouldShowLayout && <Navbar />}
 
-        <Routes location={location}>
+        <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/result" element={<Result />} />
           <Route path="/login" element={<Login />} />
 
-          {/* ✅ Slide animation only on base /faculty route */}
+          {/* ✅ Faculty routes with nested departments and details */}
           <Route path="/faculty" element={<PageWrapper><Faculty /></PageWrapper>}>
             <Route path="cse" element={<CSE />} />
             <Route path="eee" element={<EEE />} />
@@ -52,11 +52,12 @@ const App = () => {
             <Route path="law" element={<Law />} />
             <Route path="islamicStudies" element={<Islamic />} />
             <Route path="publicHealth" element={<PublicHealth />} />
-            <Route path="architecture" element={<Architecture></Architecture>} />
+            <Route path="architecture" element={<Architecture />} />
+            <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
         </Routes>
 
-        {/* ✅ Conditionally render Footer */}
+        {/* ✅ Footer only if allowed */}
         {shouldShowLayout && <Footer />}
       </div>
     </AnimatePresence>

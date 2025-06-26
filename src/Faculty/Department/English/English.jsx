@@ -5,7 +5,7 @@ const English = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_eng.json')
+        fetch('http://localhost:5000/teachers/English')
             .then(res => res.json())
             .then(data => {
                 console.log(data)
