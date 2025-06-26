@@ -5,7 +5,7 @@ const Law = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_law.json')
+        fetch('http://localhost:5000/teachers/LAW')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

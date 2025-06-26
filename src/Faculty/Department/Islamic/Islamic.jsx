@@ -5,7 +5,7 @@ const Islamic = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_islamic.json')
+        fetch('http://localhost:5000/teachers/Islamic%20studies')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

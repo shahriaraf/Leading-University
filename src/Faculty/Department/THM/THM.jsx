@@ -5,7 +5,7 @@ const THM = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_thm.json')
+        fetch('http://localhost:5000/teachers/Tourism%20and%20Hospitality%20Management')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

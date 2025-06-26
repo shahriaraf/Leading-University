@@ -5,7 +5,7 @@ const Architecture = () => {
    const [teachers , setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('/faculty_arc.json')
+        fetch('http://localhost:5000/teachers/Architecture')
         .then(res => res.json())
         .then(data => {
             console.log(data)
