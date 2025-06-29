@@ -8,9 +8,9 @@ const Faculty = () => {
 
         <div className='bg-white text-black'>
 
-            <div className='bg-[#023020] text-white p-10 md:px-16 flex justify-between items-center'>
+            <div className='bg-[#023020] text-white py-18 md:px-16 flex justify-between items-center'>
                 <div>
-                    <h2 className='text-2xl md:text-4xl font-bold'>Faculty Directory</h2>
+                    <h2 className='text-2xl text-center md:text-4xl font-bold'>Faculty Directory</h2>
                     <p className='font-light'>Meet our distinguished faculty members</p>
                 </div>
 
