@@ -32,19 +32,19 @@ const Navbar = () => {
         {/* Brand */}
         <Link to="/" className="flex items-center">
           <img
-            className="w-9 h-9 lg:w-[68px] lg:h-[68px]"
+            className="w-8 h-8 lg:w-[68px] lg:h-[68px]"
             src="https://www.lus.ac.bd/wp-content/themes/lu-main/img/logo-white.png"
             alt="leading university"
           />
           <img
-            className="h-8 lg:h-12"
+            className="h-6 lg:h-12"
             src="https://www.lus.ac.bd/wp-content/themes/lu-main/img/label-white.png"
             alt="promise to leave"
           />
         </Link>
 
         {/* Center Menu - Desktop */}
-        <ul className="hidden md:flex gap-8 font-medium">
+        <ul className="hidden md:flex items-center gap-8 font-medium">
           {links.map(link => (
             <li key={link.name}>
               <Link
@@ -56,7 +56,7 @@ const Navbar = () => {
             </li>
           ))}
           <Link to={'/login'}>
-            <button className='btn text-[#455A64] px-4 py-2 rounded-2xl bg-white'>Login</button>
+            <button className='text-[#455A64] px-4 py-1 rounded-md bg-white hover:bg-white/70'>Login</button>
           </Link>
         </ul>
 

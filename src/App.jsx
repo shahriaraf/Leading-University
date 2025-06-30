@@ -56,9 +56,6 @@ const App = () => {
             <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
         </Routes>
-
-        {/* ✅ Footer only if allowed */}
-        {shouldShowLayout && <Footer />}
       </div>
     </AnimatePresence>
   );
