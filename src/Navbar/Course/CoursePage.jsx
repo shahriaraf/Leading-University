@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Search, Clock, Users, BookOpen, GraduationCap } from "lucide-react";
+import { Search, BookOpen, GraduationCap } from "lucide-react";
 
 // Departments including "All"
 const departments = [
@@ -20,6 +20,8 @@ export default function CoursesPage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedDepartment, setSelectedDepartment] = useState("all");
     const [courses, setCourses] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const coursesPerPage = 15;
 
     useEffect(() => {
         fetch('http://localhost:5000/courses')
@@ -33,10 +35,14 @@ export default function CoursesPage() {
             });
     }, []);
 
+    useEffect(() => {
+        setCurrentPage(1); // Reset to first page on filter change
+    }, [searchTerm, selectedDepartment]);
+
     const filteredCourses = courses.filter((course) => {
         const matchesSearch =
-            (course.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-            (course.code || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (course.courseTitle || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (course.courseCode || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
             (course.instructor || "").toLowerCase().includes(searchTerm.toLowerCase());
 
         const matchesDepartment =
@@ -46,23 +52,21 @@ export default function CoursesPage() {
         return matchesSearch && matchesDepartment;
     });
 
+    const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
+    const indexOfLastCourse = currentPage * coursesPerPage;
+    const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+    const currentCourses = filteredCourses.slice(indexOfFirstCourse, indexOfLastCourse);
 
+    const handlePrev = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
 
-    const getLevelColor = (level) => {
-        switch (level) {
-            case "Beginner":
-                return "badge-success";
-            case "Intermediate":
-                return "badge-warning";
-            case "Advanced":
-                return "badge-error";
-            default:
-                return "badge-neutral";
-        }
+    const handleNext = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
     };
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-[#023020] mb-10">
             {/* Header */}
             <header className="border-b shadow-sm bg-[#023020] py-16">
                 <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
@@ -106,10 +110,10 @@ export default function CoursesPage() {
                     ))}
                 </div>
 
-                <h2 className="text-2xl font-bold mb-2 text-[#023020] px-6">
+                <h2 className="text-2xl font-bold mb-2 text-white px-6">
                     {departments.find((d) => d.id.toLowerCase() === selectedDepartment.toLowerCase())?.name}
                 </h2>
-                <p className="text-gray-600 mb-6 px-6">
+                <p className="text-green-200 mb-6 px-6">
                     {selectedDepartment === "all"
                         ? `Showing ${filteredCourses.length} courses across all departments`
                         : `Courses offered by the ${departments.find((d) => d.id.toLowerCase() === selectedDepartment.toLowerCase())?.name} department.`}
@@ -117,10 +121,10 @@ export default function CoursesPage() {
 
                 {/* Courses Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-                    {filteredCourses.map((course) => (
+                    {currentCourses.map((course) => (
                         <div
                             key={course.id}
-                            className="card bg-white shadow-md border-l-4"
+                            className="card bg-green-100 shadow-md border-l-4"
                             style={{
                                 borderLeftColor:
                                     departments.find((d) => d.id.toLowerCase() === (course.department || "").toLowerCase())?.color || "#999"
@@ -129,28 +133,47 @@ export default function CoursesPage() {
                             <div className="card-body">
                                 <div className="flex justify-between items-center">
                                     <span className="badge badge-neutral text-xs">{course.courseCode}</span>
-                                    
                                 </div>
-
                                 <h3 className="card-title mt-2 text-lg text-gray-800">{course.courseTitle}</h3>
                                 <p className="text-sm text-gray-600">{course.description}</p>
-
-                                
-
-                                
-
-                               
-                               
-
                                 <div className="flex justify-between items-center mt-4">
                                     <span className="font-medium text-[#023020] border-2 p-2 rounded-2xl">{course.courseCredit} Credits</span>
-                                    
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
 
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex justify-center items-center mt-8 space-x-2">
+                        <button
+                            onClick={handlePrev}
+                            disabled={currentPage === 1}
+                            className={`px-4 py-2 rounded-md border text-sm font-medium ${currentPage === 1
+                                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}`}
+                        >
+                            Prev
+                        </button>
+
+                        <span className="text-white text-sm">
+                            Page {currentPage} of {totalPages}
+                        </span>
+
+                        <button
+                            onClick={handleNext}
+                            disabled={currentPage === totalPages}
+                            className={`px-4 py-2 rounded-md border text-sm font-medium ${currentPage === totalPages
+                                ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}`}
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
+
+                {/* No Courses Found */}
                 {filteredCourses.length === 0 && (
                     <div className="text-center py-12">
                         <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />

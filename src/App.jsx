@@ -23,12 +23,15 @@ import Islamic from './Faculty/Department/Islamic/Islamic';
 import PublicHealth from './Faculty/Department/Public Health/PublicHealth';
 import Architecture from './Faculty/Department/Architecture/Architecture';
 import Course from './Navbar/Course/Course';
+import Register from './Register/Register';
+import ResultAnalytics from './Result/ResultAnalytics';
+
 
 const App = () => {
   const location = useLocation();
 
   // Hide layout on login and exact /faculty (but allow layout for nested like /faculty/cse)
-  const noLayoutRoutes = ['/login' , '/faculty'];
+  const noLayoutRoutes = ['/login' , '/faculty','/register',];
   const shouldShowLayout = !noLayoutRoutes.includes(location.pathname);
 
   return (
@@ -41,7 +44,9 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Course></Course>} />
           <Route path="/result" element={<Result />} />
+          <Route path="/resultAnalytics" element={<ResultAnalytics />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* ✅ Faculty routes with nested departments and details */}
           <Route path="/faculty" element={<PageWrapper><Faculty /></PageWrapper>}>

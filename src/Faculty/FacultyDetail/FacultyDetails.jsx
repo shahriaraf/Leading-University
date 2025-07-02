@@ -4,7 +4,7 @@ const FacultyDetail = ({ teacher }) => {
     const { name, designation, email, department ,phone, image, biography, education, officeHours } = teacher;
 
     return (
-        <div className="border w-full mt-10  shadow-md text-gray-500 bg-[#F0FDF4] rounded-2xl space-y-4 animate-fade-in">
+        <div className="border w-full mt-10   shadow-md text-gray-500 bg-[#F0FDF4] rounded-2xl space-y-4 animate-fade-in">
             <div className="flex  p-5 items-center space-x-4 border bg-gradient-to-r from-[#023020] to-[#455A64] text-white">
                 <img
                     src={image}
