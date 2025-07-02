@@ -1,13 +1,45 @@
 import './login.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider';
 
 const Login = () => {
     const fullTitle = 'Leeading University — Where Futures Begin';
-    const fullSubtitle = 'Emmpowering students through digital access';
+    const fullSubtitle = 'Prromise To Lead';
 
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
+    const {setUser , UserLogIn} = useContext(AuthContext);
+    const navigate = useNavigate()
+
+    const HandleLogin = (e) => {
+        e.preventDefault();
+
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        // console.log(email,password);
+
+        
+
+        UserLogIn(email, password)
+            .then(result => {
+                // console.log(result.user);
+                setUser(result.user);
+                navigate("/")
+
+            })
+            .catch(error => {
+                console.log('ERROR' , error.message);
+                
+            })
+
+
+
+
+    }
 
     useEffect(() => {
         let titleIndex = 0;
@@ -55,26 +87,27 @@ const Login = () => {
 
                     <div className="flex justify-center items-center">
                         <div className="card w-full max-w-sm shrink-0 glass-card">
-                            <div className="card-body">
+                            <form onSubmit={HandleLogin} className="card-body">
                                 <fieldset className="fieldset text-white">
-                                    <label className="label">Student ID or Username</label>
+                                    <label className="label">Email</label>
                                     <input
-                                        type="email"
-                                        className="input input-bordered bg-white bg-opacity-10 text-white placeholder-white"
+                                        type="email" name='email'
+                                        className="input input-bordered bg-transparent bg-opacity-10 text-white placeholder-gray-400"
                                         placeholder="Email"
                                     />
                                     <label className="label">Password</label>
                                     <input
-                                        type="password"
-                                        className="input input-bordered bg-white bg-opacity-10 text-white placeholder-white"
+                                        type="password" name='password'
+                                        className="input input-bordered bg-transparent bg-opacity-10 text-white placeholder-gray-400"
                                         placeholder="Password"
                                     />
                                     <div>
-                                        <a className="link link-hover text-white text-sm">Forgot password?</a>
+                                        <a className="link link-hover text-white text-sm text-left">Forgot password?</a>
+                                        <p>New here ? <Link to={'/register'}>Create a account</Link></p>
                                     </div>
                                     <button className="btn btn-neutral mt-4 w-full">Login</button>
                                 </fieldset>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

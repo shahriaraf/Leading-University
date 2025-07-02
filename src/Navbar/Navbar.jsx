@@ -1,14 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { AuthContext } from '../AuthProvider';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, userLogOut } = useContext(AuthContext);
+
+  const HandleLogout = () => {
+    userLogOut()
+      .then(result => {
+        console.log('Successfully logged out')
+      })
+      .catch(error =>
+        console.log("ERROR")
+      )
+  }
 
   const links = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
+    { name: "Courses", path: "/courses" },
     { name: "Faculty Members", path: "/faculty/cse" },
     { name: "Contact", path: "/contact" },
   ];
@@ -55,9 +67,35 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
-          <Link to={'/login'}>
-            <button className='btn text-[#455A64] px-4 py-2 rounded-2xl bg-white'>Login</button>
-          </Link>
+          {
+            user && user?.email ?
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={user?.photoURL} />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                  <li>
+                    <a className="justify-between">
+                      Student Portal
+                      <span className="badge">New</span>
+                    </a>
+                  </li>
+                  <li><a>Settings</a></li>
+                  <li onClick={HandleLogout}><a>Logout</a></li>
+                </ul>
+              </div>
+              :
+              <Link to={'/login'}>
+                <button className='btn text-[#455A64] px-4 py-2 rounded-2xl bg-white'>Login</button>
+              </Link>
+          }
+
         </ul>
 
         {/* Mobile Menu Toggle */}
