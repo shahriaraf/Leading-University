@@ -4,7 +4,7 @@ const EEE = () => {
     const [teachers, setTeacher] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/teachers/Electrical%20and%20Electronic%20Engineering')
+        fetch('https://server-lu.vercel.app/teachers/Electrical%20and%20Electronic%20Engineering')
             .then(res => res.json())
             .then(data => {
                 console.log(data)

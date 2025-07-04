@@ -8,14 +8,14 @@ const English = () => {
     const [teacherDetail, setTeacherDetail] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5000/teachers/English')
+        fetch('https://server-lu.vercel.app/teachers/English')
             .then(res => res.json())
             .then(data => setTeachers(data));
     }, []);
 
     useEffect(() => {
         if (selectedTeacherId) {
-            fetch(`http://localhost:5000/teacherDetails/${selectedTeacherId}`)
+            fetch(`https://server-lu.vercel.app/teacherDetails/${selectedTeacherId}`)
                 .then(res => res.json())
                 .then(data => setTeacherDetail(data));
         }

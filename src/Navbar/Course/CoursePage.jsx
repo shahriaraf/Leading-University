@@ -24,7 +24,7 @@ export default function CoursesPage() {
     const coursesPerPage = 15;
 
     useEffect(() => {
-        fetch('http://localhost:5000/courses')
+        fetch('https://server-lu.vercel.app/courses')
             .then(res => res.json())
             .then(data => {
                 console.log(data);
