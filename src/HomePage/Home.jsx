@@ -72,17 +72,6 @@ const Home = () => {
 
            
             <LatestNews></LatestNews>
-            <section className="py-12 bg-white px-4 text-center">
-                <h2 className="text-2xl font-bold mb-8">@UniCamp</h2>
-                <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {[1, 2, 3, 4, 5, 6].map(i => (
-                        <div key={i} className={`bg-${i % 2 === 0 ? 'red' : 'blue'}-700 text-white p-4 rounded shadow`}>
-                            <p className="text-sm mb-3">"Student highlight or tweet content here..."</p>
-                            <span className="text-sm">March 20, 2025</span>
-                        </div>
-                    ))}
-                </div>
-            </section>
             <Events></Events>
             <Footer></Footer>
 
