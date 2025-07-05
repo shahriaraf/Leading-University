@@ -56,6 +56,7 @@ const App = () => {
             <Route path="architecture" element={<Architecture />} />
             <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
+          
         </Routes>
       </div>
     </AnimatePresence>
