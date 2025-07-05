@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FacultyCard from '../../FacultyCard/facultyCard';
+import FacultyCard from '../../FacultyCard/FacultyCard';
 import FacultyDetail from '../../FacultyDetail/FacultyDetails';
 
 

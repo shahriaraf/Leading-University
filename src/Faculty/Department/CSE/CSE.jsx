@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import FacultyCard from "../../FacultyCard/facultyCard";
 import FacultyDetail from "../../FacultyDetail/FacultyDetails";
+import FacultyCard from "../../FacultyCard/FacultyCard";
+
 
 const CSE = () => {
     const [teachers, setTeachers] = useState([]);
