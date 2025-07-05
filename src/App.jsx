@@ -12,9 +12,9 @@ import PageWrapper from './component/PageWrapper/PageWrapper';
 import FacultyDetails from './Faculty/FacultyDetail/FacultyDetails';
 
 // Faculty Departments
-import CSE from './Faculty/Department/CSE/CSE';
+
 import EEE from './Faculty/Department/EEE/EEE';
-import Bba from './Faculty/Department/BBA/bba';
+import Bba from './Faculty/Department/BBA/Bba';
 import Civil from './Faculty/Department/Ciivil/Civil';
 import English from './Faculty/Department/English/English';
 import THM from './Faculty/Department/THM/THM';
@@ -22,6 +22,7 @@ import Law from './Faculty/Department/Law/Law';
 import Islamic from './Faculty/Department/Islamic/Islamic';
 import PublicHealth from './Faculty/Department/Public Health/PublicHealth';
 import Architecture from './Faculty/Department/Architecture/Architecture';
+import CSE from './Faculty/Department/CSE/CSE';
 import Course from './Navbar/Course/Course';
 import Register from './Register/Register';
 import ResultAnalytics from './Result/ResultAnalytics';
@@ -50,7 +51,7 @@ const App = () => {
 
           {/* ✅ Faculty routes with nested departments and details */}
           <Route path="/faculty" element={<PageWrapper><Faculty /></PageWrapper>}>
-            <Route path="cse" element={<CSE />} />
+            <Route path="cse" element={<CSE></CSE>} />
             <Route path="eee" element={<EEE />} />
             <Route path="bba" element={<Bba />} />
             <Route path="civil" element={<Civil />} />
@@ -62,10 +63,8 @@ const App = () => {
             <Route path="architecture" element={<Architecture />} />
             <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
+          
         </Routes>
-
-        {/* ✅ Footer only if allowed */}
-        {shouldShowLayout && <Footer />}
       </div>
     </AnimatePresence>
   );

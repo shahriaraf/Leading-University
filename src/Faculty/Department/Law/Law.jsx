@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FacultyCard from '../../FacultyCard/facultyCard'
-import FacultyDetail from '../../FacultyDetail/FacultyDetails';
+import FacultyCard from '../../FacultyCard/FacultyCard'
 
 const Law = () => {
     const [teachers, setTeachers] = useState([]);
