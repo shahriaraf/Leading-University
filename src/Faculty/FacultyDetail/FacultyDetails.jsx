@@ -1,7 +1,7 @@
 import { FaMessage } from "react-icons/fa6";
 
 const FacultyDetail = ({ teacher }) => {
-    const { name, designation, email, department ,phone, image, biography, education, officeHours } = teacher;
+    const { name, designation, email, department , image } = teacher;
 
     return (
         <div className="border w-full mt-10   shadow-md text-gray-500 bg-[#F0FDF4] rounded-2xl space-y-4 animate-fade-in">
