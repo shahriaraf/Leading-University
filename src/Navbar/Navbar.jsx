@@ -80,12 +80,14 @@ const Navbar = () => {
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                  <li>
-                    <a className="justify-between">
-                      Student Portal
-                      <span className="badge">New</span>
-                    </a>
-                  </li>
+                  <Link to={'/studentPortal'}>
+                    <li>
+                      <a className="justify-between">
+                        Student Portal
+                        <span className="badge">New</span>
+                      </a>
+                    </li>
+                  </Link>
                   <li><a>Settings</a></li>
                   <li onClick={HandleLogout}><a>Logout</a></li>
                 </ul>
@@ -109,6 +111,9 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 bg-[#455A64] text-white space-y-2">
+          <Link to={'/login'}>
+            <button className='btn text-[#455A64] md:px-4 md:py-2 md:rounded-2xl bg-white'>Login</button>
+          </Link>
           <ul className="space-y-2 font-medium">
             {links.map(link => (
               <li key={link.name}>
@@ -122,6 +127,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+
         </div>
       )}
     </header>

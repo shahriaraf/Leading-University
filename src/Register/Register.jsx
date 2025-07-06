@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider';
+import axios from 'axios';
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -30,6 +31,7 @@ const Register = () => {
         const department = form.department.value;
         const password = form.password.value;
         const imageFile = form.image.files[0];
+        const DOB = form.DOB.value;
 
         if (!imageFile) {
             alert("Please upload a profile image.");
@@ -55,15 +57,28 @@ const Register = () => {
                 createUser(email, password)
                     .then(result => {
                         setUser(result.user);
-                        updateUserProfile({
-                            displayName: name,
-                            photoURL: photoURL
-                        }).then(() => {
-                            navigate("/");
+                        updateUserProfile({ displayName: name, photoURL }).then(() => {
+                            const userData = {
+                                name,
+                                email,
+                                image: photoURL,
+                                stdId,
+                                department,
+                                DOB
+                            }
+
+                            axios.post('https://server-lu.vercel.app/users', userData)
+                                .then(results => {
+                                    console.log(results.data);
+                                    navigate("/");
+                                }).catch(err => {
+                                    console.error("User save error:", err);
+                                });
                         }).catch(error => {
                             console.error("Update profile error:", error.message);
                         });
                     })
+
                     .catch(error => {
                         console.error("Create user error:", error.message);
                     });
@@ -149,22 +164,34 @@ const Register = () => {
                                         className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
                                         placeholder="email"
                                     />
-                                    <label className="label mb-2">Department</label>
-                                    <select name='department' defaultValue="Select your Department" className=" select bg-transparent w-full bg-opacity-10 text-black placeholder-gray-400">
+                                    <div className='flex gap-3'>
+                                        <div>
+                                            <label className="label mb-2">Department</label>
+                                            <select name='department' defaultValue="Select your Department" className=" select bg-transparent w-full bg-opacity-10 text-black placeholder-gray-400">
 
-                                        <option className='text-gray-400'>Select your Department</option>
-                                        <option>Computer Science and Engineering</option>
-                                        <option>Electric and Electronic Engineering</option>
-                                        <option>CivilEngineering</option>
-                                        <option>Business Administration</option>
-                                        <option>Architecture</option>
-                                        <option>Tourism and Hospitality Management</option>
-                                        <option>Islamic Studies</option>
-                                        <option>English</option>
-                                        <option>Public Health</option>
-                                        <option>Law</option>
+                                                <option className='text-gray-400'>Select your Department</option>
+                                                <option>Computer Science and Engineering</option>
+                                                <option>Electric and Electronic Engineering</option>
+                                                <option>CivilEngineering</option>
+                                                <option>Business Administration</option>
+                                                <option>Architecture</option>
+                                                <option>Tourism and Hospitality Management</option>
+                                                <option>Islamic Studies</option>
+                                                <option>English</option>
+                                                <option>Public Health</option>
+                                                <option>Law</option>
 
-                                    </select>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="label mb-2">Date of Birth</label>
+                                            <input
+                                                type="date" name='DOB'
+                                                className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
+                                                placeholder="email"
+                                            />
+                                        </div>
+                                    </div>
                                     <label className="label">Password</label>
                                     <input
                                         type="password" name='password'

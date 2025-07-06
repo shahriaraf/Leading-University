@@ -1,7 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from "recharts";
+import { AuthContext } from "../AuthProvider";
+import axios from "axios";
 
 const ResultAnalytics = ({ result }) => {
+
+
+
+  // useEffect(() =>{
+
+
+  //   axios.get(`https://server-lu.vercel.app/users/profileDetails/${user.email}`)
+  //   .then(res =>{
+  //     setCurrentStudent(res.data);
+  //     console.log('Student Now' , res.data)
+  //   })
+
+  // } , [user?.email])
+
+
   if (!result) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] flex justify-center items-center">
@@ -55,7 +72,7 @@ const ResultAnalytics = ({ result }) => {
 
   // Enhanced color schemes
   const COLORS = [
-    '#22c55e', '#3b82f6', '#facc15', '#ef4444', 
+    '#22c55e', '#3b82f6', '#facc15', '#ef4444',
     '#a78bfa', '#fb923c', '#34d399', '#ec4899'
   ];
 
@@ -104,11 +121,11 @@ const ResultAnalytics = ({ result }) => {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text 
-        x={x} 
-        y={y} 
-        fill="white" 
-        textAnchor={x > cx ? 'start' : 'end'} 
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
         className="text-sm font-semibold"
       >
@@ -118,10 +135,10 @@ const ResultAnalytics = ({ result }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] py-20">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 py-12">
       <div className="container mx-auto px-6 py-12 max-w-7xl">
         {/* Header Section */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8 border border-gray-100">
+        <div className="bg-amber-50/90  rounded-3xl shadow-xl p-8 mb-8 border border-gray-100">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
             <div className="space-y-4">
               <h1 className="text-4xl font-bold text-gray-800 mb-2">{student.name}</h1>
@@ -160,7 +177,7 @@ const ResultAnalytics = ({ result }) => {
         {/* Charts Section */}
         <div className="grid lg:grid-cols-3 gap-8 mb-8">
           {/* GPA Trend Chart */}
-          <div className="lg:col-span-2 bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+          <div className="lg:col-span-2 bg-amber-50/90 rounded-3xl shadow-xl p-8 border border-gray-100">
             <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
               <div className="w-1 h-8 bg-blue-500 rounded-full mr-4"></div>
               Academic Performance Trend
@@ -169,8 +186,8 @@ const ResultAnalytics = ({ result }) => {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={semesterData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis 
-                    dataKey="name" 
+                  <XAxis
+                    dataKey="name"
                     tick={{ fontSize: 12 }}
                     angle={-45}
                     textAnchor="end"
@@ -179,10 +196,10 @@ const ResultAnalytics = ({ result }) => {
                   <YAxis tick={{ fontSize: 12 }} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
-                  <Line 
-                    type="monotone" 
-                    dataKey="gpa" 
-                    stroke="#3b82f6" 
+                  <Line
+                    type="monotone"
+                    dataKey="gpa"
+                    stroke="#3b82f6"
                     strokeWidth={3}
                     dot={{ fill: '#3b82f6', strokeWidth: 2, r: 6 }}
                     activeDot={{ r: 8 }}
@@ -194,7 +211,7 @@ const ResultAnalytics = ({ result }) => {
           </div>
 
           {/* Grade Distribution */}
-          <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+          <div className="bg-amber-50/90 rounded-3xl shadow-xl p-8 border border-gray-100">
             <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
               <div className="w-1 h-8 bg-purple-500 rounded-full mr-4"></div>
               Grade Distribution
@@ -217,8 +234,8 @@ const ResultAnalytics = ({ result }) => {
                     ))}
                   </Pie>
                   <Tooltip content={<CustomTooltip />} />
-                  <Legend 
-                    verticalAlign="bottom" 
+                  <Legend
+                    verticalAlign="bottom"
                     height={36}
                     formatter={(value, entry) => (
                       <span style={{ color: entry.color }}>{value}</span>
@@ -231,7 +248,7 @@ const ResultAnalytics = ({ result }) => {
         </div>
 
         {/* Credits Bar Chart */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 mb-8 border border-gray-100">
+        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-8 mb-8 border border-gray-100">
           <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
             <div className="w-1 h-8 bg-green-500 rounded-full mr-4"></div>
             Credit Distribution by Semester
@@ -240,8 +257,8 @@ const ResultAnalytics = ({ result }) => {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={semesterData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis 
-                  dataKey="name" 
+                <XAxis
+                  dataKey="name"
                   tick={{ fontSize: 12 }}
                   angle={-45}
                   textAnchor="end"
@@ -250,9 +267,9 @@ const ResultAnalytics = ({ result }) => {
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                <Bar 
-                  dataKey="credits" 
-                  fill="#22c55e" 
+                <Bar
+                  dataKey="credits"
+                  fill="#22c55e"
                   name="Credits"
                   radius={[4, 4, 0, 0]}
                 />
@@ -262,23 +279,22 @@ const ResultAnalytics = ({ result }) => {
         </div>
 
         {/* Semester Details */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-8 border border-gray-100">
           <h3 className="text-2xl font-bold text-gray-800 mb-8 flex items-center">
             <div className="w-1 h-8 bg-indigo-500 rounded-full mr-4"></div>
             Detailed Semester Breakdown
           </h3>
-          
+
           {/* Semester Tabs */}
           <div className="mb-8">
             <div className="flex flex-wrap gap-2 p-2 bg-gray-100 rounded-2xl">
               {semesterList.map((sem, i) => (
                 <button
                   key={sem.name}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-                    selectedSemesterIndex === i
-                      ? "bg-white text-blue-600 shadow-md transform scale-105"
+                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${selectedSemesterIndex === i
+                      ? "bg-amber-50/90 text-blue-600 shadow-md transform scale-105"
                       : "text-gray-600 hover:text-blue-600 hover:bg-white/50"
-                  }`}
+                    }`}
                   onClick={() => setSelectedSemesterIndex(i)}
                 >
                   {sem.name}
@@ -347,43 +363,64 @@ const ResultAnalytics = ({ result }) => {
 export default function ResultAnalyticsWrapper() {
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    const apiUrl = "https://www.lus.ac.bd/wp-admin/admin-ajax.php";
+  const [currentStudent, setCurrentStudent] = useState([]);
 
-    const formBody = new URLSearchParams({
-      action: "get-result",
-      student_id: "0182310012101102",
-      birth_date: "2001-06-06",
-    }).toString();
+ useEffect(() => {
+  // First fetch: get current student profile by email
+  if (!user?.email) return;
 
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: formBody,
-      credentials: "include",
+  axios.get(`https://server-lu.vercel.app/users/profileDetails/${user.email}`)
+    .then((res) => {
+      setCurrentStudent(res.data);
+      console.log('Student Now', res.data);
     })
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not OK");
-        return res.json();
-      })
-      .then((data) => {
-        if (data.success) {
-          setResultData(data);
-        } else {
-          throw new Error("API returned unsuccessful response");
-        }
-      })
-      .catch((err) => {
-        setError(err.message || "Failed to fetch");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+    .catch((err) => {
+      setError("Failed to load profile details.");
+      setLoading(false);
+    });
+}, [user?.email]);
+
+// Second fetch: get results using currentStudent info
+useEffect(() => {
+  if (!currentStudent?.stdId || !currentStudent?.DOB) return;
+
+  const apiUrl = "https://www.lus.ac.bd/wp-admin/admin-ajax.php";
+
+  const formBody = new URLSearchParams({
+    action: "get-result",
+    student_id: `${currentStudent.stdId}`,
+    birth_date: `${currentStudent.DOB}`,
+  }).toString();
+
+  fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: formBody,
+    credentials: "include",
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Network response was not OK");
+      return res.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        setResultData(data);
+      } else {
+        throw new Error("API returned unsuccessful response");
+      }
+    })
+    .catch((err) => {
+      setError(err.message || "Failed to fetch result.");
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}, [currentStudent?.stdId, currentStudent?.DOB]);
+
 
   if (loading)
     return (
