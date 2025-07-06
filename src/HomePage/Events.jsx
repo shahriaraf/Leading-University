@@ -150,7 +150,7 @@ export default function Events() {
         <div className="overflow-hidden">
           <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
             {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-              <div key={slideIndex} className="w-full flex-shrink-0 flex flex-wrap gap-4 sm:gap-6 lg:gap-8 px-2 justify-center">
+              <div key={slideIndex} className="w-full flex-shrink-0 flex flex-row gap-4 sm:gap-6 lg:gap-8 px-2 justify-center">
                 {events.slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide).map((event, cardIndex) => (
                   <div key={cardIndex} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-100 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                     <div className="relative overflow-hidden">
