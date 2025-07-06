@@ -143,7 +143,7 @@ export default function UniversityNews() {
   const handleMouseLeave = () => setIsAutoScrolling(false);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gray-100">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse"></div>
@@ -156,7 +156,7 @@ export default function UniversityNews() {
           {/* Enhanced Header */}
           <div className="text-center mb-12 sm:mb-16">
             <div className="inline-flex items-center justify-center p-2 bg-white rounded-full shadow-lg mb-6">
-              <div className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-full">
+              <div className="flex items-center space-x-2 bg-gradient-to-r from-[#023020] to-[#034830] text-white px-4 py-2 rounded-full">
                 <BookOpen className="w-5 h-5" />
                 <span className="font-medium">University News</span>
               </div>
@@ -175,8 +175,8 @@ export default function UniversityNews() {
                   key={index}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index >= currentIndex && index < currentIndex + CARDS_PER_VIEW
-                      ? 'w-8 bg-blue-600'
-                      : 'w-2 bg-gray-300'
+                      ? 'w-8 bg-gradient-to-r from-[#023020] to-[#034830]'
+                      : 'w-2 bg-gray-400'
                   }`}
                 />
               ))}
@@ -186,7 +186,7 @@ export default function UniversityNews() {
           {/* Enhanced News Container */}
           <div className="relative max-w-6xl mx-auto">
             <div 
-              className="relative bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20"
+              className="relative backdrop-blur-sm  overflow-hidden border border-white/20"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -208,7 +208,7 @@ export default function UniversityNews() {
                         style={{ minHeight: `${CARD_HEIGHT}px` }}
                       >
                         {/* Hover Gradient Overlay */}
-                        <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-all duration-500 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-[#ecf8f4] transition-all duration-500 pointer-events-none"></div>
                         
                         <div className="relative flex flex-col lg:flex-row h-full">
                           {/* Enhanced Image Section */}
@@ -239,7 +239,7 @@ export default function UniversityNews() {
                           {/* Enhanced Content Section */}
                           <div className="flex-1 p-6 sm:p-8 flex flex-col justify-between">
                             <div>
-                              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+                              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 transition-colors duration-300 leading-tight">
                                 {news.title}
                               </h2>
                               <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
@@ -269,14 +269,6 @@ export default function UniversityNews() {
                                   <span>{news.readTime}</span>
                                 </div>
                               </div>
-                              
-                              {/* Enhanced CTA Button */}
-                              <button className="group/btn inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                                <span>Read Full Story</span>
-                                <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center group-hover/btn:translate-x-1 transition-transform duration-300">
-                                  <span className="text-xs">→</span>
-                                </div>
-                              </button>
                             </div>
                           </div>
                         </div>
@@ -291,15 +283,15 @@ export default function UniversityNews() {
             <div className="flex justify-center mt-8 space-x-4">
               <button
                 onClick={scrollToPrevious}
-                className="group flex items-center space-x-2 bg-white/80 backdrop-blur-sm hover:bg-white text-gray-700 hover:text-blue-600 px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-200 hover:border-blue-300"
+                className="group flex items-center space-x-2 bg-gradient-to-r from-[#023020] to-[#034830] backdrop-blur-sm hover:bg-white text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                <ChevronUp className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <ChevronUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
                 <span>Previous</span>
               </button>
               
               <button
                 onClick={scrollToNext}
-                className="group flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="group flex items-center space-x-2 bg-gradient-to-r from-[#023020] to-[#034830] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 <span>Next</span>
                 <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300" />
