@@ -17,18 +17,28 @@ const Home = () => {
                         <h2 className="text-3xl font-semibold mb-4">
                             Leading Open Day
                         </h2>
-                        <div className="w-18 h-1 bg-[#455A64] mb-6" />
+                        <div className="w-18 h-1 bg-gradient-to-r from-[#023020] to-[#034830] mb-6" />
                         <p className="text-gray-700 text-lg mb-8">
                             Discover what studying at Leading University is really like. Explore our campus and find out more about our admission process and get to know our community.
                         </p>
 
-                        <motion.button
-                            whileTap={{ scale: 1.8 }}
-
-                            className="bg-[#455A64] hover:bg-[#2a3f4b] text-white px-6 py-3 font-semibold rounded transition inline-flex items-center gap-2"
+                       <div className="flex justify-start mb-10 md:mt-4 mt-8 stagger-animate">
+                        <motion.a
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            Learn more <span>➝</span>
-                        </motion.button>
+                            <button
+                                className="group relative rounded-xl bg-gradient-to-r from-[#023020] to-[#034830] text-base sm:text-lg font-semibold px-6 sm:px-12 py-2 text-white hover:text-black transition-colors duration-300 overflow-hidden"
+                    
+                               
+                            >
+                                <span className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                                <span className="relative z-10 flex items-center gap-2">
+                                     Learn more <span>➝</span>
+                                </span>
+                            </button>
+                        </motion.a>
+                    </div>
                     </div>
 
                     {/* Right Image */}
@@ -54,23 +64,28 @@ const Home = () => {
                     <p className="text-lg md:text-xl mb-6">
                         Choose from 16 undergraduate and graduate majors
                     </p>
-                    <button className="bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-3 rounded shadow inline-flex items-center w-max">
-                        View all programs
-                        <svg
-                            className="ml-2 w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
+                    <div className="flex justify-start mb-10 md:mt-4 mt-8 stagger-animate">
+                        <motion.a
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                            <button
+                                className="group relative rounded-xl bg-white text-base sm:text-lg font-semibold px-6 sm:px-12 py-2 text-black hover:text-white transition-colors duration-300 overflow-hidden"
+                    
+                               
+                            >
+                                <span className="absolute inset-0 bg-gradient-to-r from-[#023020] to-[#034830] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                                <span className="relative z-10 flex items-center gap-2">
+                                    View All Programs
+                                </span>
+                            </button>
+                        </motion.a>
+                    </div>
                 </div>
             </div>
 
 
-           
+
             <LatestNews></LatestNews>
             <Events></Events>
             <Footer></Footer>
@@ -82,3 +97,6 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
