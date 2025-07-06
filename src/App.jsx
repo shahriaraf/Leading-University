@@ -26,32 +26,31 @@ import CSE from './Faculty/Department/CSE/CSE';
 import Course from './Navbar/Course/Course';
 import Register from './Register/Register';
 import ResultAnalytics from './Result/ResultAnalytics';
+import StudentPortal from './StudentPortal/StudenntPortal';
 
 
 const App = () => {
   const location = useLocation();
 
-  // Hide layout on login and exact /faculty (but allow layout for nested like /faculty/cse)
-  const noLayoutRoutes = ['/login' , '/faculty','/register',];
-  const shouldShowLayout = !noLayoutRoutes.includes(location.pathname);
+  const noLayoutRoutes = ['/login', '/register', '/faculty', '/studentPortal'];
+  const shouldShowLayout = !noLayoutRoutes.some(path => location.pathname.startsWith(path));
 
   return (
     <AnimatePresence mode="wait">
       <div>
-        {/* ✅ Navbar only if allowed */}
         {shouldShowLayout && <Navbar />}
 
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
-          <Route path="/courses" element={<Course></Course>} />
+          <Route path="/courses" element={<Course />} />
           <Route path="/result" element={<Result />} />
           <Route path="/resultAnalytics" element={<ResultAnalytics />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/studentPortal" element={<StudentPortal />} />
 
-          {/* ✅ Faculty routes with nested departments and details */}
           <Route path="/faculty" element={<PageWrapper><Faculty /></PageWrapper>}>
-            <Route path="cse" element={<CSE></CSE>} />
+            <Route path="cse" element={<CSE />} />
             <Route path="eee" element={<EEE />} />
             <Route path="bba" element={<Bba />} />
             <Route path="civil" element={<Civil />} />
@@ -63,11 +62,13 @@ const App = () => {
             <Route path="architecture" element={<Architecture />} />
             <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
-          
         </Routes>
+
+        {shouldShowLayout && <Footer />}
       </div>
     </AnimatePresence>
   );
 };
+
 
 export default App;
