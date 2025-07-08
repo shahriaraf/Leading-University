@@ -27,6 +27,7 @@ import Course from './Navbar/Course/Course';
 import Register from './Register/Register';
 import ResultAnalytics from './Result/ResultAnalytics';
 import StudentPortal from './StudentPortal/StudenntPortal';
+import BusSchedule from './Bus/BusSchedule';
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/courses" element={<Course />} />
           <Route path="/result" element={<Result />} />
           <Route path="/resultAnalytics" element={<ResultAnalytics />} />
+          <Route path="/busSchedule" element={<BusSchedule />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/studentPortal" element={<StudentPortal />} />
