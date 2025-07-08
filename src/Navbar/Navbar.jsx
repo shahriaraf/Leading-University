@@ -21,8 +21,9 @@ const Navbar = () => {
   const links = [
     { name: "Home", path: "/" },
     { name: "Courses", path: "/courses" },
+    { name: "Bus Schedule", path: "/busSchedule" },
     { name: "Faculty Members", path: "/faculty/cse" },
-    { name: "Contact", path: "/contact" },
+  
   ];
 
   // Scroll listener to change navbar style
