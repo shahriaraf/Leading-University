@@ -1714,7 +1714,7 @@ const Faculty = () => {
     return (
         <div className='bg-white text-black min-h-screen relative'>
             {/* Enhanced Header */}
-            <div ref={headerRef} className='bg-gradient-to-r from-[#023020] to-[#034830] text-white py-12 md:py-20 px-6 md:px-16 relative overflow-hidden'>
+            <div ref={headerRef} className='bg-gradient-to-r from-[#023020] to-[#034830] text-white py-12 md:py-12 px-6 md:px-16 relative overflow-hidden'>
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-xl"></div>
                     <div className="absolute bottom-10 right-10 w-40 h-40 bg-white rounded-full blur-xl"></div>

@@ -1,5 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import { Calendar, Clock, User, ChevronUp, ChevronDown, BookOpen, Award, Home, Search } from "lucide-react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Sample News Data
 const newsData = [
@@ -94,8 +98,217 @@ export default function UniversityNews() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
+  // Additional refs for GSAP animations
+  const mainContainerRef = useRef(null);
+  const backgroundElementsRef = useRef([]);
+  const headerRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const progressRef = useRef(null);
+  const newsContainerRef = useRef(null);
+  const navigationRef = useRef(null);
+  const newsCardsRef = useRef([]);
+
   const CARD_HEIGHT = 280;
   const CARDS_PER_VIEW = 2;
+
+  useEffect(() => {
+    // Main container entrance animation
+    if (mainContainerRef.current) {
+      gsap.fromTo(
+        mainContainerRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: mainContainerRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // Background elements animation
+    backgroundElementsRef.current.forEach((element, index) => {
+      if (element) {
+        gsap.fromTo(
+          element,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 0.4,
+            duration: 2,
+            delay: index * 0.5,
+            ease: 'back.out(1.7)',
+            scrollTrigger: {
+              trigger: element,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    });
+
+    // Header badge animation
+    if (badgeRef.current) {
+      gsap.fromTo(
+        badgeRef.current,
+        { scale: 0, opacity: 0, rotation: -180 },
+        {
+          scale: 1,
+          opacity: 1,
+          rotation: 0,
+          duration: 1.2,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: badgeRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // Title animation with character split effect
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 50, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // Subtitle animation
+    if (subtitleRef.current) {
+      gsap.fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          delay: 0.3,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: subtitleRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // Progress indicator animation
+    if (progressRef.current) {
+      gsap.fromTo(
+        progressRef.current.children,
+        { scaleX: 0, opacity: 0 },
+        {
+          scaleX: 1,
+          opacity: 1,
+          duration: 0.8,
+          delay: 0.5,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: progressRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // News container animation
+    if (newsContainerRef.current) {
+      gsap.fromTo(
+        newsContainerRef.current,
+        { opacity: 0, y: 80, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: newsContainerRef.current,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+
+    // Navigation buttons animation
+    if (navigationRef.current) {
+      gsap.fromTo(
+        navigationRef.current.children,
+        { opacity: 0, y: 50, scale: 0.8 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: navigationRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // Continuous floating animation for background elements
+    backgroundElementsRef.current.forEach((element, index) => {
+      if (element) {
+        gsap.to(element, {
+          y: -20,
+          duration: 3 + index,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: index * 0.5,
+        });
+      }
+    });
+
+    // Parallax effect for the main container
+    gsap.to(mainContainerRef.current, {
+      y: -50,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: mainContainerRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      }
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -143,33 +356,42 @@ export default function UniversityNews() {
   const handleMouseLeave = () => setIsAutoScrolling(false);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div ref={mainContainerRef} className="min-h-screen bg-gray-100">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/2 w-80 h-80 bg-slate-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse delay-2000"></div>
+        <div 
+          ref={el => backgroundElementsRef.current[0] = el}
+          className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse"
+        ></div>
+        <div 
+          ref={el => backgroundElementsRef.current[1] = el}
+          className="absolute top-40 right-10 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse delay-1000"
+        ></div>
+        <div 
+          ref={el => backgroundElementsRef.current[2] = el}
+          className="absolute bottom-20 left-1/2 w-80 h-80 bg-slate-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse delay-2000"
+        ></div>
       </div>
 
       <div className="relative z-10 py-12 px-4 sm:py-16 sm:px-6 lg:py-20 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Enhanced Header */}
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-flex items-center justify-center p-2 bg-white rounded-full shadow-lg mb-6">
+          <div ref={headerRef} className="text-center mb-12 sm:mb-16">
+            <div ref={badgeRef} className="inline-flex items-center justify-center p-2 bg-white rounded-full shadow-lg mb-6">
               <div className="flex items-center space-x-2 bg-gradient-to-r from-[#023020] to-[#034830] text-white px-4 py-2 rounded-full">
                 <BookOpen className="w-5 h-5" />
                 <span className="font-medium">University News</span>
               </div>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+            <h1 ref={titleRef} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
               Latest Campus Updates
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p ref={subtitleRef} className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Stay connected with the pulse of university life through our curated news and announcements
             </p>
             
             {/* Progress Indicator */}
-            <div className="flex justify-center mt-8 space-x-2">
+            <div ref={progressRef} className="flex justify-center mt-8 space-x-2">
               {newsData.map((_, index) => (
                 <div
                   key={index}
@@ -186,6 +408,7 @@ export default function UniversityNews() {
           {/* Enhanced News Container */}
           <div className="relative max-w-6xl mx-auto">
             <div 
+              ref={newsContainerRef}
               className="relative backdrop-blur-sm  overflow-hidden border border-white/20"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -204,6 +427,7 @@ export default function UniversityNews() {
                     return (
                       <div
                         key={news.id}
+                        ref={el => newsCardsRef.current[index] = el}
                         className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 ${categoryConfig.bgAccent}`}
                         style={{ minHeight: `${CARD_HEIGHT}px` }}
                       >
@@ -237,7 +461,7 @@ export default function UniversityNews() {
                           </div>
 
                           {/* Enhanced Content Section */}
-                          <div className="flex-1 p-6 sm:p-8 flex flex-col justify-between">
+                          <div className="flex-1 p-6 sm:p-8 flex flex-col justify-between card-content">
                             <div>
                               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 transition-colors duration-300 leading-tight">
                                 {news.title}
@@ -280,7 +504,7 @@ export default function UniversityNews() {
             </div>
 
             {/* Enhanced Navigation Controls */}
-            <div className="flex justify-center mt-8 space-x-4">
+            <div ref={navigationRef} className="flex justify-center mt-8 space-x-4">
               <button
                 onClick={scrollToPrevious}
                 className="group flex items-center space-x-2 bg-gradient-to-r from-[#023020] to-[#034830] backdrop-blur-sm hover:bg-white text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
