@@ -377,7 +377,7 @@ const Home = () => {
 
       <LatestNews />
       <Events />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
