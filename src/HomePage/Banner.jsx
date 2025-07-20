@@ -238,7 +238,7 @@ const Banner = () => {
               />
               <div 
                 ref={(el) => (overlayRefs.current[index] = el)}
-                className="absolute inset-0 bg-black/40 z-10" 
+                className="absolute inset-0 bg-black z-10" 
               />
 
               {/* Left-Aligned Text */}
@@ -248,7 +248,7 @@ const Banner = () => {
               >
                 <h2 
                   ref={(el) => (titleRefs.current[index] = el)}
-                  className="sm:text-4xl md:text-5xl lg:text-7xl font-mono leading-snug mb-4 drop-shadow-lg"
+                  className="sm:text-4xl md:text-5x0l font-bold lg:text-7xl font-mono leading-snug mb-4 drop-shadow-lg"
                   style={{ perspective: '1000px' }}
                 >
                   {slides[index].title}
