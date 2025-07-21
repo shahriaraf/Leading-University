@@ -212,7 +212,7 @@ const Register = () => {
                                         <input name='image' type="file" className="file-input" />
                                     </div>
                                     <p>Already have a account ? <Link to={'/login'}>Login</Link></p>
-                                    <button className="btn btn-neutral mt-4 w-full">Register</button>
+                                    <button type='submit' className="btn btn-neutral mt-4 w-full">Register</button>
                                 </fieldset>
                             </form>
                         </div>
