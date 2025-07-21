@@ -24,6 +24,7 @@ const Register = () => {
 
     const HandleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Form submitted");
 
         const form = e.target;
         const name = form.name.value;
@@ -39,7 +40,6 @@ const Register = () => {
             return;
         }
 
-        // Upload image to imgbb
         const formData = new FormData();
         formData.append("image", imageFile);
 
@@ -48,56 +48,46 @@ const Register = () => {
                 method: "POST",
                 body: formData,
             });
-
             const imageData = await res.json();
 
-            if (imageData.success) {
-                const photoURL = imageData.data.display_url;
-
-                // Create user
-                createUser(email, password)
-                    .then(result => {
-                        setUser(result.user);
-                        updateUserProfile({ displayName: name, photoURL }).then(() => {
-                            const userData = {
-                                name,
-                                email,
-                                image: photoURL,
-                                stdId,
-                                department,
-                                DOB
-                            }
-
-                            axios.post('https://server-lu.vercel.app/users', userData)
-                                .then(results => {
-                                    console.log(results.data);
-                                    navigate("/");
-                                    Swal.fire({
-                                        position: "center",
-                                        icon: "success",
-                                        title: "Welcome",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                }).catch(err => {
-                                    console.error("User save error:", err);
-                                });
-                        }).catch(error => {
-                            console.error("Update profile error:", error.message);
-                        });
-                    })
-
-                    .catch(error => {
-                        console.error("Create user error:", error.message);
-                    });
-
-            } else {
-                console.error("Image upload failed");
+            if (!imageData.success) {
+                alert("Image upload failed.");
+                return;
             }
+
+            const photoURL = imageData.data.display_url;
+
+            const userCredential = await createUser(email, password);
+            await updateUserProfile({ displayName: name, photoURL });
+            setUser(userCredential.user);
+
+            const userData = {
+                name,
+                email,
+                image: photoURL,
+                stdId,
+                department,
+                DOB
+            };
+
+            await axios.post('https://server-lu.vercel.app/users', userData);
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Welcome",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            navigate("/");
+
         } catch (err) {
-            console.error("Image upload error:", err);
+            console.error("Registration error:", err.message);
+            alert("Something went wrong. Please try again.");
         }
     };
+
 
 
     useEffect(() => {

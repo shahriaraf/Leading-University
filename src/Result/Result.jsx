@@ -137,7 +137,7 @@ const Result = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 md:py-24 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 py-6 md:py-24 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
