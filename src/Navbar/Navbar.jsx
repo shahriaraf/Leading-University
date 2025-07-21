@@ -23,7 +23,7 @@ const Navbar = () => {
     { name: "Courses", path: "/courses" },
     { name: "Bus Schedule", path: "/busSchedule" },
     { name: "Faculty Members", path: "/faculty/cse" },
-  
+
   ];
 
   // Scroll listener to change navbar style
@@ -112,9 +112,22 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 bg-[#455A64] text-white space-y-2">
-          <Link to={'/login'}>
-            <button className='btn text-[#455A64] md:px-4 md:py-2 md:rounded-2xl bg-white'>Login</button>
-          </Link>
+          {
+            user && user?.email ?
+
+              <>
+                <ul>
+                  <li><Link to={'/studentPortal'}>Student Portal</Link></li>
+                  <li onClick={HandleLogout}><a>Logout</a></li>
+                </ul>
+              </>
+
+              :
+
+              <Link to={'/login'}>
+                <button className='btn text-[#455A64] md:px-4 md:py-2 md:rounded-2xl bg-white'>Login</button>
+              </Link>
+          }
           <ul className="space-y-2 font-medium">
             {links.map(link => (
               <li key={link.name}>
