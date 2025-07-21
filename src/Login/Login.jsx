@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const fullTitle = 'Leeading University — Where Futures Begin';
@@ -10,7 +11,7 @@ const Login = () => {
 
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
-    const {setUser , UserLogIn} = useContext(AuthContext);
+    const { setUser, UserLogIn } = useContext(AuthContext);
     const navigate = useNavigate()
 
     const HandleLogin = (e) => {
@@ -22,18 +23,25 @@ const Login = () => {
 
         // console.log(email,password);
 
-        
+
 
         UserLogIn(email, password)
             .then(result => {
                 // console.log(result.user);
                 setUser(result.user);
-                navigate("/")
+                navigate("/");
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Welcome",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
             })
             .catch(error => {
-                console.log('ERROR' , error.message);
-                
+                console.log('ERROR', error.message);
+
             })
 
 

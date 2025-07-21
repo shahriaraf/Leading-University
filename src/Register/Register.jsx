@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -71,6 +72,13 @@ const Register = () => {
                                 .then(results => {
                                     console.log(results.data);
                                     navigate("/");
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "success",
+                                        title: "Welcome",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
                                 }).catch(err => {
                                     console.error("User save error:", err);
                                 });
