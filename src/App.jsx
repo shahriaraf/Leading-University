@@ -6,7 +6,6 @@ import Home from './HomePage/Home';
 import Navbar from './Navbar/Navbar';
 import Result from './Result/Result';
 import Login from './Login/Login';
-import Footer from './Footer/Footer';
 import Faculty from './Faculty/Faculty';
 import PageWrapper from './component/PageWrapper/PageWrapper';
 import FacultyDetails from './Faculty/FacultyDetail/FacultyDetails';
