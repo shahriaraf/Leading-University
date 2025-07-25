@@ -65,8 +65,6 @@ const App = () => {
             <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
         </Routes>
-
-        {shouldShowLayout && <Footer />}
       </div>
     </AnimatePresence>
   );
