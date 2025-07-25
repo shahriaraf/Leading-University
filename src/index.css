@@ -13,3 +13,13 @@
   /* Tailwind red-500 */
   opacity: 1;
 }
+
+/* Additional custom styles if needed */
+.news-item-hover:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+}
+
+.primary {
+  background-color: #05737D;
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Tanjima Siddika Chandni",
+    "designation": "Assistant Professor",
+    "profileLink": "https://www.lus.ac.bd/author/tanjima/",
+    "department": "Architecture"
+  },
+  {
+    "name": "Syed Mohsin Ali",
+    "designation": "Assistant Professor & Head (Acting)",
+    "profileLink": "https://www.lus.ac.bd/author/mohsin/",
+    "department": "Architecture"
+  },
+  {
+    "name": "Sayed Ahmed",
+    "designation": "Assistant Professor(On study leave)",
+    "profileLink": "https://www.lus.ac.bd/author/sayedahmed/",
+    "email": "sayed_arch@lus.ac.bd",
+    "phone": "+88-01707219556",
+    "image": "https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2021/08/Sayed-Ahmed-scaled.jpg?fit=690%2C920&ssl=1",
+    "qualifications": "",
+    "areas": "",
+    "publications": "",
+    "department": "Architecture"
+  },
+  {
+    "name": "Salina Akther",
+    "designation": "Assistant Professor",
+    "profileLink": "https://www.lus.ac.bd/author/salina/",
+    "email": "sumi-arcbk@yahoo.com",
+    "phone": "01918774428",
+    "image": "https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2015/11/Salina-Akther.jpg?fit=476%2C566&ssl=1",
+    "qualifications": "",
+    "areas": "",
+    "publications": "",
+    "department": "Architecture"
+  },
+  {
+    "name": "Md Imtiaz Ahmad",
+    "designation": "Lecturer(On study leave)",
+    "profileLink": "https://www.lus.ac.bd/author/imtiaz/",
+    "email": "imtiaz_arch@lus.ac.bd",
+    "phone": "+8801683754887",
+    "image": "https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2021/02/Edited.jpg?fit=472%2C591&ssl=1",
+    "qualifications": "",
+    "areas": "Spatial Planning, Transit-oriented Development (TOD), and Nature-based Solutions (NbS), with a particular focus on Rethinking the Built Environment and Community-based Planning to enhance Urban Resilience.",
+    "publications": "",
+    "department": "Architecture"
+  },
+  {
+    "name": "Farhana Hoque",
+    "designation": "Lecturer",
+    "profileLink": "https://www.lus.ac.bd/author/farhana/",
+    "email": "farhanahoque_arch@lus.ac.bd",
+    "phone": "+8801675972839",
+    "image": "https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2020/12/Farhana.jpg?fit=681%2C1024&ssl=1",
+    "qualifications": "",
+    "areas": "",
+    "publications": "",
+    "department": "Architecture"
+  },
+  {
+    "name": "Burhan Uddin",
+    "designation": "Lecturer",
+    "profileLink": "https://www.lus.ac.bd/author/burhan_arch/",
+    "email": "burhan_arch@lus.ac.bd",
+    "phone": "+8801740994597",
+    "image": "https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2024/03/IMG_3664_burhan_arch.jpg?fit=690%2C690&ssl=1",
+    "qualifications": "",
+    "areas": "",
+    "publications": "",
+    "department": "Architecture"
+  },
+  {
+    "name": "Arpan Shil",
+    "designation": "Lecturer",
+    "profileLink": "https://www.lus.ac.bd/author/arpan/",
+    "email": "arpan_arch@lus.ac.bd",
+    "phone": "01827879188",
+    "image": "https://i0.wp.com/www.lus.ac.bd/wp-content/uploads/2022/09/Arpan-Shil.jpg?fit=690%2C827&ssl=1",
+    "qualifications": "",
+    "areas": "",
+    "publications": "",
+    "department": "Architecture"
+  }
+]
