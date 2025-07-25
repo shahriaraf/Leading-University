@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const ChatbaseBot = () => {
+const Chatbot = () => {
   useEffect(() => {
     // Prevent duplicate script loading
     if (document.getElementById("7adSeqiBOW8rofSsI5ILb")) return;
@@ -51,4 +51,4 @@ const ChatbaseBot = () => {
   return null;
 };
 
-export default ChatbaseBot;
+export default Chatbot;
