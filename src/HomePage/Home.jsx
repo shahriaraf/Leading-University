@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Footer from '../Footer/Footer';
 import LatestNews from './LatestNews';
 import Events from './Events';
+import ChatbaseBot from '../../Chatbot/Chatbot';
 
 const Home = () => {
     return (
@@ -110,6 +111,7 @@ const Home = () => {
                     ))}
                 </div>
             </section>
+            <ChatbaseBot />
             <Events></Events>
             <Footer></Footer>
 
