@@ -7,6 +7,7 @@ import Events from './Events';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Chatbot from '../../Chatbot/Chatbot';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -309,6 +310,7 @@ const Home = () => {
   return (
     <div>
       <Banner />
+      <Chatbot></Chatbot>
       <section ref={sectionRef} className="bg-gray-100 py-16 px-4 lg:relative">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10">
           {/* Left Content */}
@@ -377,7 +379,7 @@ const Home = () => {
 
       <LatestNews />
       <Events />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
