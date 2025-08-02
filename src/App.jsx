@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Toaster } from 'react-hot-toast';
 
 // Pages & Components
 import Home from './HomePage/Home';
@@ -27,12 +28,14 @@ import Register from './Register/Register';
 import ResultAnalytics from './Result/ResultAnalytics';
 import StudentPortal from './StudentPortal/StudenntPortal';
 import BusSchedule from './Bus/BusSchedule';
+import AdminPortal from './Admin Portal/AdminPortal';
+import Dashboard from './Dashboard/Dashboard';
 
 
 const App = () => {
   const location = useLocation();
 
-  const noLayoutRoutes = ['/login', '/register', '/faculty', '/studentPortal'];
+  const noLayoutRoutes = ['/login', '/register', '/faculty', '/studentPortal','/adminPortal','/dashboard'];
   const shouldShowLayout = !noLayoutRoutes.some(path => location.pathname.startsWith(path));
 
   return (
@@ -49,6 +52,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/studentPortal" element={<StudentPortal />} />
+          <Route path="/adminPortal" element={<AdminPortal/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
 
           <Route path="/faculty" element={<PageWrapper><Faculty /></PageWrapper>}>
             <Route path="cse" element={<CSE />} />
@@ -64,6 +69,8 @@ const App = () => {
             <Route path="facultyDetail/:id" element={<FacultyDetails />} />
           </Route>
         </Routes>
+
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
     </AnimatePresence>
   );

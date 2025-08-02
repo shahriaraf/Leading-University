@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -67,23 +68,30 @@ const Register = () => {
                 image: photoURL,
                 stdId,
                 department,
-                DOB
+                DOB,
+                role:'student'
             };
 
-            await axios.post('https://server-lu.vercel.app/users', userData);
+            await axios.post('http://localhost:5000/users', userData)
+            .then(res =>{
+                if(res.data.insertedId)
+                {
+                    navigate('/');
+                    toast.success("Welcome to Leading University")
 
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Welcome",
-                showConfirmButton: false,
-                timer: 1500
-            });
+                }
+            }).catch(err =>{
+                console.log(err.message)
+                toast.error("something went wrong")
+            })
 
-            navigate("/");
+           
+
+            
 
         } catch (err) {
             console.error("Registration error:", err.message);
+            toast.error("Registration Error")
             alert("Something went wrong. Please try again.");
         }
     };

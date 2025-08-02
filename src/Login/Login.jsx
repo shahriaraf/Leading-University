@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const fullTitle = 'Leeading University — Where Futures Begin';
@@ -30,14 +31,7 @@ const Login = () => {
                 // console.log(result.user);
                 setUser(result.user);
                 navigate("/");
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Welcome",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
+                toast.success('Welcome Back to LU')
             })
             .catch(error => {
                 console.log('ERROR', error.message);

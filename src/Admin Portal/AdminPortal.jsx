@@ -20,8 +20,11 @@ import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import StudentProfile from '../StudentProfile/StudentProfile';
 import { useNavigate } from 'react-router-dom';
+import { FaUsers } from "react-icons/fa6";
+import AdminProfile from './AdminProfile';
+import UsersManagement from '../Admin Portal/UsersManagement'
 
-const StudentPortal = () => {
+const AdminPortal = () => {
   const [activeRoute, setActiveRoute] = useState('results');
   const { user } = useContext(AuthContext);
   const [currentStudent, setCurrentStudent] = useState([]);
@@ -48,18 +51,17 @@ const StudentPortal = () => {
     setSidebarOpen(false);
   };
 
+
+//   ! This is where we will add Components for admin
   const renderContent = () => {
     switch (activeRoute) {
       case 'profile':
-        return <StudentProfile student={currentStudent} cgpa={cgpa} />;
-      case 'results':
-        return <Result setCgpa={setCgpa} />;
-      case 'analytics':
-        return <ResultAnalyticsWrapper />;
-      case 'routine':
-        return <div>Routine Placeholder</div>; // Replace with actual component
+        return <AdminProfile></AdminProfile>;
+      case 'users':
+        return <UsersManagement></UsersManagement>
+       // Replace with actual component
       default:
-        return <Result />;
+        return <UsersManagement></UsersManagement>;
     }
   };
 
@@ -71,7 +73,7 @@ const StudentPortal = () => {
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:relative`}
       >
         <div className="p-6 border-b border-emerald-700">
-          <h1 className="text-xl font-bold">Student Portal</h1>
+          <h1 className="text-xl font-bold">Admin Portal</h1>
         </div>
 
         <motion.div
@@ -81,23 +83,22 @@ const StudentPortal = () => {
           transition={{ delay: 0.2 }}
         >
           <div className="flex items-center space-x-3">
-            <div className="w-11 bg-emerald-600 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center">
               <img className='rounded-full' src={user?.photoURL} alt="" />
             </div>
             <div>
               <p className="font-medium">{currentStudent?.name}</p>
-              <p className="text-sm text-emerald-300">{currentStudent.stdId}</p>
-              <p className="text-sm text-emerald-300">{currentStudent.role}</p>
+              <p className="text-sm text-emerald-300">{user?.email}</p>
+              <p className="text-sm text-emerald-300">{currentStudent?.role}</p>
             </div>
           </div>
         </motion.div>
 
         <nav className="p-4 space-y-2">
           {[
-            { icon: <User />, label: 'Student Profile', key: 'profile' },
-            { icon: <ClipboardList />, label: 'Results', key: 'results' },
-            { icon: <TrendingUp />, label: 'Result Analytics', key: 'analytics' },
-            { icon: <Calendar />, label: 'Class Routine', key: 'routine' }
+            { icon: <User />, label: 'Admin Profile', key: 'profile' },
+            { icon: <FaUsers />, label: 'Users', key: 'users' },
+            
           ].map(item => (
             <motion.button
               key={item.key}
@@ -164,4 +165,4 @@ const StudentPortal = () => {
   );
 };
 
-export default StudentPortal;
+export default AdminPortal;
