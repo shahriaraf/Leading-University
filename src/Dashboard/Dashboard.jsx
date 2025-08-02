@@ -3,24 +3,34 @@ import AdminPortal from '../Admin Portal/AdminPortal';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import StudentPortal from '../StudentPortal/StudenntPortal';
+import Loading from '../component/PageWrapper/Loading/Loading';
 
 const Dashboard = () => {
 
     const { user } = useContext(AuthContext);
-    const [currentUser, setCurrentUser] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
+        if (!user?.email) return;
 
-        axios.get(`http://localhost:5000/users/profileDetails/${user?.email}`)
+        axios.get(`http://localhost:5000/users/profileDetails/${user.email}`)
             .then(res => {
-                // console.log(res.data.role);
-                setCurrentUser(res.data)
+                 console.log('Profile data:', res.data); 
+                setCurrentUser(res.data);
+                setLoading(false);
             })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
+    }, [user?.email]);
+
+    if (loading) return <Loading></Loading>;
 
 
-    }, [user?.email])
-
-    const userRole = currentUser.role;
+    const userRole = currentUser?.role;
     // console.log(userRole)
 
 

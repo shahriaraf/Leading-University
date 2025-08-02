@@ -91,8 +91,6 @@ const UserManagement = () => {
 
 
   const HandleAdmin = (id) => {
-
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -100,25 +98,57 @@ const UserManagement = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Make Admin!"
+      confirmButtonText: "Yes, Make Admin!",
     }).then((result) => {
       if (result.isConfirmed) {
-
         axios.patch(`http://localhost:5000/users/admin/${id}`)
-          .then(res => {
-
+          .then((res) => {
             if (res.data.modifiedCount > 0) {
-              toast.success("Role Set to Admin")
+              toast.success("Role Set to Admin");
+              setAdminButton(false);
+
+              // ✅ Refresh users after success
+              fetchUsers();
             }
-
-            setAdminButton(false)
           })
-
+          .catch((err) => {
+            toast.error("Failed to update role");
+          });
       }
     });
+  };
 
 
-  }
+  const HandleDelete = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.delete(`http://localhost:5000/users/${id}`)
+                    .then(res => {
+
+                        if (res.data.deletedCount > 0) {
+
+                           toast.success('User Deleted')
+
+                        }
+
+                        fetchUsers()
+                    })
+
+            }
+        });
+
+    }
+
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -303,6 +333,7 @@ const UserManagement = () => {
                       </motion.button>
                     </div>
                     <motion.button
+                    onClick={() => HandleDelete(user._id)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="btn btn-sm bg-red-600/80 hover:bg-red-600 text-white border-none"
