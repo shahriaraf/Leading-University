@@ -81,10 +81,10 @@ const Navbar = () => {
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                  <Link to={'/studentPortal'}>
+                  <Link to={'/dashboard'}>
                     <li>
                       <a className="justify-between">
-                        Student Portal
+                        Dashboard
                         <span className="badge">New</span>
                       </a>
                     </li>
@@ -117,7 +117,7 @@ const Navbar = () => {
 
               <>
                 <ul>
-                  <li><Link to={'/studentPortal'}>Student Portal</Link></li>
+                  <li><Link to={'/dashboard'}>Dashboard</Link></li>
                   <li onClick={HandleLogout}><a>Logout</a></li>
                 </ul>
               </>

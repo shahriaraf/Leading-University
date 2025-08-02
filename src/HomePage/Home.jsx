@@ -8,6 +8,7 @@ import Events from './Events';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Chatbot from '../../Chatbot/Chatbot';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +17,7 @@ const Home = () => {
   const leftContentRef = useRef(null);
   const rightImageRef = useRef(null);
   const bgTextBlockRef = useRef(null);
-  
+
   // Additional refs for enhanced animations
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -368,9 +369,11 @@ const Home = () => {
                 className="group relative rounded-xl bg-white text-base sm:text-lg font-semibold px-6 sm:px-12 py-2 text-black hover:text-white transition-colors duration-300 overflow-hidden"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-[#023020] to-[#034830] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                <span className="relative z-10 flex items-center gap-2">
-                  View All Programs
-                </span>
+                <Link to={'/courses'}>
+                  <span className="relative z-10 flex items-center gap-2">
+                    View All Programs
+                  </span>
+                </Link>
               </button>
             </motion.a>
           </div>
