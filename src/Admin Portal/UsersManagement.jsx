@@ -24,7 +24,7 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/users');
+      const response = await fetch('https://server-lu.vercel.app/users');
       if (!response.ok) {
         throw new Error('Failed to fetch users');
       }
@@ -101,7 +101,7 @@ const UserManagement = () => {
       confirmButtonText: "Yes, Make Admin!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.patch(`http://localhost:5000/users/admin/${id}`)
+        axios.patch(`https://server-lu.vercel.app/users/admin/${id}`)
           .then((res) => {
             if (res.data.modifiedCount > 0) {
               toast.success("Role Set to Admin");
@@ -132,7 +132,7 @@ const UserManagement = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/users/${id}`)
+                axios.delete(`https://server-lu.vercel.app/users/${id}`)
                     .then(res => {
 
                         if (res.data.deletedCount > 0) {
