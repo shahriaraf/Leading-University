@@ -26,7 +26,7 @@ import UsersManagement from '../Admin Portal/UsersManagement'
 
 const AdminPortal = () => {
   const [activeRoute, setActiveRoute] = useState('results');
-  const { user } = useContext(AuthContext);
+  const { user , userLogOut } = useContext(AuthContext);
   const [currentStudent, setCurrentStudent] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
@@ -127,6 +127,10 @@ const AdminPortal = () => {
           </motion.button>
 
           <motion.button
+          onClick={() =>{
+            userLogOut()
+            navigate('/')
+          }}
             className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-emerald-700 transition-colors"
             variants={sidebarItemVariants}
             whileHover="hover"

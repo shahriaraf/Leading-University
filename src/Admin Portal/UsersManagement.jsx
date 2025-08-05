@@ -24,7 +24,7 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://server-lu.vercel.app/users');
+      const response = await fetch('http://localhost:5000/users');
       if (!response.ok) {
         throw new Error('Failed to fetch users');
       }
