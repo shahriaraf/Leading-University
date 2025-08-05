@@ -309,6 +309,7 @@ const Home = () => {
 
   return (
     <div>
+    
       <Banner />
       <Chatbot></Chatbot>
       <section ref={sectionRef} className="bg-gray-100 py-16 px-4 lg:relative">
