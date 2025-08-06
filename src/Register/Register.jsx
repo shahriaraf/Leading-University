@@ -72,7 +72,7 @@ const Register = () => {
                 role:'student'
             };
 
-            await axios.post('http://localhost:5000/users', userData)
+            await axios.post('https://server-lu.vercel.app/users', userData)
             .then(res =>{
                 if(res.data.insertedId)
                 {
