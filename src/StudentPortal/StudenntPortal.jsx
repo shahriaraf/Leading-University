@@ -12,7 +12,8 @@ import {
   GraduationCap,
   Clock,
   Book,
-  Home
+  Home,
+  ListPlus,
 } from 'lucide-react';
 import Result from '../Result/Result';
 import ResultAnalyticsWrapper from '../Result/ResultAnalytics';
@@ -20,6 +21,8 @@ import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import StudentProfile from '../StudentProfile/StudentProfile';
 import { useNavigate } from 'react-router-dom';
+import AddCourse from '../Admin Portal/AddCourse';
+
 
 const StudentPortal = () => {
   const [activeRoute, setActiveRoute] = useState('results');
@@ -56,6 +59,8 @@ const StudentPortal = () => {
         return <Result setCgpa={setCgpa} />;
       case 'analytics':
         return <ResultAnalyticsWrapper />;
+      case 'addcourse':
+        return <AddCourse></AddCourse>;
       case 'routine':
         return <div>Routine Placeholder</div>; // Replace with actual component
       default:
@@ -97,7 +102,8 @@ const StudentPortal = () => {
             { icon: <User />, label: 'Student Profile', key: 'profile' },
             { icon: <ClipboardList />, label: 'Results', key: 'results' },
             { icon: <TrendingUp />, label: 'Result Analytics', key: 'analytics' },
-            { icon: <Calendar />, label: 'Class Routine', key: 'routine' }
+            { icon: <Calendar />, label: 'Class Routine', key: 'routine' },
+            { icon: <ListPlus />, label: 'Add Course', key: 'addcourse' }
           ].map(item => (
             <motion.button
               key={item.key}
@@ -113,6 +119,8 @@ const StudentPortal = () => {
               <span>{item.label}</span>
             </motion.button>
           ))}
+
+          
 
           <motion.button
             className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-emerald-700 transition-colors"
@@ -140,6 +148,7 @@ const StudentPortal = () => {
           </motion.button>
         </nav>
       </motion.div>
+      
 
       {/* Content */}
       <div className="flex-1">

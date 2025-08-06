@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaUsers } from "react-icons/fa6";
 import AdminProfile from './AdminProfile';
 import UsersManagement from '../Admin Portal/UsersManagement'
+import AddCourse from './AddCourse';
 
 const AdminPortal = () => {
   const [activeRoute, setActiveRoute] = useState('results');
@@ -115,6 +116,16 @@ const AdminPortal = () => {
             </motion.button>
           ))}
 
+          <motion.button
+            className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-emerald-700 transition-colors"
+            variants={sidebarItemVariants}
+            whileHover="hover"
+            whileTap="tap"
+            onClick={() => navigate('/')}
+          >
+           <AddCourse className='w-5 h-5'></AddCourse>
+            <span>Add Course</span>
+          </motion.button>
           <motion.button
             className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-emerald-700 transition-colors"
             variants={sidebarItemVariants}
