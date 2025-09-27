@@ -72,7 +72,10 @@ const App = () => {
 
         <Toaster position="top-center" reverseOrder={false} />
       </div>
+      <Toaster/>
     </AnimatePresence>
+
+    
   );
 };
 

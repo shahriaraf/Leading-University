@@ -12,7 +12,8 @@ import {
   GraduationCap,
   Clock,
   Book,
-  Home
+  Home,
+  ListPlus
 } from 'lucide-react';
 import Result from '../Result/Result';
 import ResultAnalyticsWrapper from '../Result/ResultAnalytics';
@@ -58,6 +59,8 @@ const AdminPortal = () => {
     switch (activeRoute) {
       case 'profile':
         return <AdminProfile></AdminProfile>;
+      case 'addCourse':
+        return <AddCourse></AddCourse>;
       case 'users':
         return <UsersManagement></UsersManagement>
        // Replace with actual component
@@ -99,6 +102,7 @@ const AdminPortal = () => {
           {[
             { icon: <User />, label: 'Admin Profile', key: 'profile' },
             { icon: <FaUsers />, label: 'Users', key: 'users' },
+             { icon: <ListPlus />, label: 'Add Course', key: 'addCourse' }
             
           ].map(item => (
             <motion.button
@@ -123,7 +127,7 @@ const AdminPortal = () => {
             whileTap="tap"
             onClick={() => navigate('/')}
           >
-           <AddCourse className='w-5 h-5'></AddCourse>
+           
             <span>Add Course</span>
           </motion.button>
           <motion.button
