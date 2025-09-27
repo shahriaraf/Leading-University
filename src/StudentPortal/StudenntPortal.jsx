@@ -51,6 +51,16 @@ const StudentPortal = () => {
     setSidebarOpen(false);
   };
 
+  const HandleLogout = () => {
+    userLogOut()
+      .then(result => {
+        console.log('Successfully logged out', result)
+      })
+      .catch(error =>
+        console.log("ERROR", error)
+      )
+  }
+
   const renderContent = () => {
     switch (activeRoute) {
       case 'profile':
@@ -134,10 +144,7 @@ const StudentPortal = () => {
           </motion.button>
 
           <motion.button
-          onClick={() => {
-            userLogOut()
-            navigate('/')
-          }}
+          onClick={HandleLogout}
             className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-emerald-700 transition-colors"
             variants={sidebarItemVariants}
             whileHover="hover"
