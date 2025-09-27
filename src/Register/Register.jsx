@@ -1,67 +1,64 @@
+// src/components/Register.jsx
 import './Register.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
-
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_API = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+const image_hosting_API = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const Register = () => {
     const fullTitle = 'Leeading University — Where Futures Begin';
     const fullSubtitle = 'Emmpowering students through digital access';
 
-    const { createUser, setUser, updateUserProfile } = useContext(AuthContext)
-
+    const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const navigate = useNavigate();
 
-
-
-    const HandleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted");
-
         const form = e.target;
+
         const name = form.name.value;
         const stdId = form.stdId.value;
         const email = form.email.value;
         const department = form.department.value;
         const password = form.password.value;
-        const imageFile = form.image.files[0];
         const DOB = form.DOB.value;
+        const imageFile = form.image.files[0];
 
         if (!imageFile) {
-            alert("Please upload a profile image.");
+            toast.error('Please upload a profile image');
             return;
         }
 
-        const formData = new FormData();
-        formData.append("image", imageFile);
-
         try {
+            // Upload image
+            const formData = new FormData();
+            formData.append('image', imageFile);
             const res = await fetch(image_hosting_API, {
-                method: "POST",
+                method: 'POST',
                 body: formData,
             });
             const imageData = await res.json();
 
             if (!imageData.success) {
-                alert("Image upload failed.");
+                toast.error('Image upload failed');
                 return;
             }
 
             const photoURL = imageData.data.display_url;
 
+            // Create user
             const userCredential = await createUser(email, password);
             await updateUserProfile({ displayName: name, photoURL });
             setUser(userCredential.user);
 
+            // Save to DB
             const userData = {
                 name,
                 email,
@@ -69,34 +66,22 @@ const Register = () => {
                 stdId,
                 department,
                 DOB,
-                role:'student'
+                role: 'student',
             };
 
-            await axios.post('http://localhost:5000/users', userData)
-            .then(res =>{
-                if(res.data.insertedId)
-                {
-                    navigate('/');
-                    toast.success("Welcome to Leading University")
+            const dbRes = await axios.post('https://server-lu.vercel.app/users', userData);
 
-                }
-            }).catch(err =>{
-                console.log(err.message)
-                toast.error("something went wrong")
-            })
-
-           
-
-            
-
+            if (dbRes.data.insertedId) {
+                toast.success('Welcome to Leading University');
+                navigate('/');
+            } else {
+                toast.error('User registration failed. Try again.');
+            }
         } catch (err) {
-            console.error("Registration error:", err.message);
-            toast.error("Registration Error")
-            alert("Something went wrong. Please try again.");
+            console.error('Registration error:', err.message);
+            toast.error(err.message || 'Registration Error');
         }
     };
-
-
 
     useEffect(() => {
         let titleIndex = 0;
@@ -105,27 +90,29 @@ const Register = () => {
 
         const typeAll = () => {
             if (titleIndex < fullTitle.length) {
-                setTitle(prev => prev + fullTitle.charAt(titleIndex));
+                setTitle((prev) => prev + fullTitle.charAt(titleIndex));
                 titleIndex++;
-                typingTimer = setTimeout(typeAll, 70); // slower typing for title
+                typingTimer = setTimeout(typeAll, 70);
             } else if (subtitleIndex < fullSubtitle.length) {
-                setSubtitle(prev => prev + fullSubtitle.charAt(subtitleIndex));
+                setSubtitle((prev) => prev + fullSubtitle.charAt(subtitleIndex));
                 subtitleIndex++;
-                typingTimer = setTimeout(typeAll, 45); // faster for subtitle
+                typingTimer = setTimeout(typeAll, 45);
             }
         };
 
         typeAll();
-
-        return () => clearTimeout(typingTimer); // clean up on unmount
+        return () => clearTimeout(typingTimer);
     }, []);
 
     return (
         <div className="loginbg">
-            <div className="flex justify-center items-center px-5 py-20" style={{ position: "relative", zIndex: 3 }}>
+            <div
+                className="flex justify-center items-center px-5 py-20"
+                style={{ position: 'relative', zIndex: 3 }}
+            >
                 <div className="text-center text-white">
                     <motion.h1
-                        className="text-white font-bold text-2xl md:text-4xl mb-3"
+                        className="font-bold text-2xl md:text-4xl mb-3"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
@@ -144,41 +131,59 @@ const Register = () => {
 
                     <div className="flex justify-center items-center text-left">
                         <div className="card w-full max-w-lg shrink-0 glass-card">
-                            <form onSubmit={HandleSubmit} className="card-body">
-                                <fieldset className="fieldset text-white">
-                                    <div className='md:flex gap-5'>
-                                        <div>
-                                            <label className="label text-left mb-2">Name</label>
+                            <form onSubmit={handleSubmit} className="card-body">
+                                <fieldset className="fieldset text-white space-y-4">
+                                    <div className="md:flex gap-5">
+                                        <div className="w-full">
+                                            <label className="label mb-2">Name</label>
                                             <input
-                                                type="text" name='name'
-                                                className="input input-bordered bg-transparent  bg-opacity-10 text-white placeholder-gray-400"
+                                                type="text"
+                                                name="name"
+                                                required
+                                                aria-label="Student name"
+                                                className="input input-bordered bg-transparent bg-opacity-10 text-white placeholder-gray-400 w-full"
                                                 placeholder="Student Name"
                                             />
                                         </div>
-                                        <div>
+                                        <div className="w-full">
                                             <label className="label mb-2">Student ID</label>
                                             <input
-                                                type="text" name='stdId'
-                                                className="input input-bordered bg-transparent bg-opacity-10 text-white placeholder-gray-400"
-                                                placeholder="student ID"
+                                                type="text"
+                                                name="stdId"
+                                                required
+                                                aria-label="Student ID"
+                                                className="input input-bordered bg-transparent bg-opacity-10 text-white placeholder-gray-400 w-full"
+                                                placeholder="Student ID"
                                             />
                                         </div>
                                     </div>
-                                    <label className="label mb-2">Email</label>
-                                    <input
-                                        type="email" name='email'
-                                        className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
-                                        placeholder="email"
-                                    />
-                                    <div className='flex gap-3'>
-                                        <div>
-                                            <label className="label mb-2">Department</label>
-                                            <select name='department' defaultValue="Select your Department" className=" select bg-transparent w-full bg-opacity-10 text-black placeholder-gray-400">
 
-                                                <option className='text-gray-400'>Select your Department</option>
+                                    <div>
+                                        <label className="label mb-2">Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            required
+                                            aria-label="Email address"
+                                            className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
+                                            placeholder="Email"
+                                        />
+                                    </div>
+
+                                    <div className="md:flex gap-5">
+                                        <div className="w-full">
+                                            <label className="label mb-2">Department</label>
+                                            <select
+                                                name="department"
+                                                required
+                                                className="select w-full bg-transparent bg-opacity-10 text-black"
+                                            >
+                                                <option disabled selected>
+                                                    Select your Department
+                                                </option>
                                                 <option>Computer Science and Engineering</option>
-                                                <option>Electric and Electronic Engineering</option>
-                                                <option>CivilEngineering</option>
+                                                <option>Electrical and Electronic Engineering</option>
+                                                <option>Civil Engineering</option>
                                                 <option>Business Administration</option>
                                                 <option>Architecture</option>
                                                 <option>Tourism and Hospitality Management</option>
@@ -186,31 +191,63 @@ const Register = () => {
                                                 <option>English</option>
                                                 <option>Public Health</option>
                                                 <option>Law</option>
-
                                             </select>
                                         </div>
-                                        <div>
+                                        <div className="w-full">
                                             <label className="label mb-2">Date of Birth</label>
                                             <input
-                                                type="date" name='DOB'
-                                                className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
-                                                placeholder="email"
+                                                type="date"
+                                                name="DOB"
+                                                required
+                                                aria-label="Date of Birth"
+                                                className="input input-bordered w-full bg-transparent bg-opacity-10 text-white"
                                             />
                                         </div>
                                     </div>
-                                    <label className="label">Password</label>
-                                    <input
-                                        type="password" name='password'
-                                        className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
-                                        placeholder="Password"
-                                    />
 
-                                    <div className='form-control w-full my-3'>
-                                        <label className="label mb-2 mr-2">Profile Image</label>
-                                        <input name='image' type="file" className="file-input" />
+                                    <div>
+                                        <label className="label">Password</label>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            required
+                                            aria-label="Password"
+                                            className="input input-bordered w-full bg-transparent bg-opacity-10 text-white placeholder-gray-400"
+                                            placeholder="Password"
+                                        />
                                     </div>
-                                    <p>Already have a account ? <Link to={'/login'}>Login</Link></p>
-                                    <button type='submit' className="btn btn-neutral mt-4 w-full">Register</button>
+
+                                    <div className="form-control w-full my-3">
+                                        <label className="label mb-2">Profile Image</label>
+                                        <input
+                                            name="image"
+                                            type="file"
+                                            accept="image/*"
+                                            required
+                                            className="file-input file-input-bordered w-full"
+                                        />
+                                    </div>
+
+                                    <p className="text-sm">
+                                        Already have an account?{' '}
+                                        <Link to="/login" className="text-blue-300 underline">
+                                            Login
+                                        </Link>
+                                    </p>
+
+                                    <button
+                                        type="submit"
+                                        className="btn btn-neutral mt-4 w-full"
+                                    >
+                                        Register
+                                    </button>
+                                    {/* Back to Home Button */}
+                                    <Link
+                                        to="/"
+                                        className="btn btn-outline mt-3 w-full text-white"
+                                    >
+                                        Back to Home
+                                    </Link>
                                 </fieldset>
                             </form>
                         </div>

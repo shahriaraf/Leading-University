@@ -15,7 +15,7 @@ const Dashboard = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        axios.get(`http://localhost:5000/users/profileDetails/${user.email}`)
+        axios.get(`https://server-lu.vercel.app/users/profileDetails/${user.email}`)
             .then(res => {
                  console.log('Profile data:', res.data); 
                 setCurrentUser(res.data);

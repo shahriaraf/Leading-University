@@ -12,7 +12,8 @@ import {
   GraduationCap,
   Clock,
   Book,
-  Home
+  Home,
+  ListPlus
 } from 'lucide-react';
 import Result from '../Result/Result';
 import ResultAnalyticsWrapper from '../Result/ResultAnalytics';
@@ -27,7 +28,7 @@ import AddCourse from './AddCourse';
 
 const AdminPortal = () => {
   const [activeRoute, setActiveRoute] = useState('results');
-  const { user } = useContext(AuthContext);
+  const { user , userLogOut } = useContext(AuthContext);
   const [currentStudent, setCurrentStudent] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
@@ -58,6 +59,8 @@ const AdminPortal = () => {
     switch (activeRoute) {
       case 'profile':
         return <AdminProfile></AdminProfile>;
+      case 'addCourse':
+        return <AddCourse></AddCourse>;
       case 'users':
         return <UsersManagement></UsersManagement>
        // Replace with actual component
@@ -99,6 +102,7 @@ const AdminPortal = () => {
           {[
             { icon: <User />, label: 'Admin Profile', key: 'profile' },
             { icon: <FaUsers />, label: 'Users', key: 'users' },
+             { icon: <ListPlus />, label: 'Add Course', key: 'addCourse' }
             
           ].map(item => (
             <motion.button
@@ -123,7 +127,7 @@ const AdminPortal = () => {
             whileTap="tap"
             onClick={() => navigate('/')}
           >
-           <AddCourse className='w-5 h-5'></AddCourse>
+           
             <span>Add Course</span>
           </motion.button>
           <motion.button
@@ -138,6 +142,10 @@ const AdminPortal = () => {
           </motion.button>
 
           <motion.button
+          onClick={() =>{
+            userLogOut()
+            navigate('/')
+          }}
             className="w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-emerald-700 transition-colors"
             variants={sidebarItemVariants}
             whileHover="hover"
