@@ -30,6 +30,7 @@ import StudentPortal from './StudentPortal/StudenntPortal';
 import BusSchedule from './Bus/BusSchedule';
 import AdminPortal from './Admin Portal/AdminPortal';
 import Dashboard from './Dashboard/Dashboard';
+import About from './component/About';
 
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/studentPortal" element={<StudentPortal />} />
           <Route path="/adminPortal" element={<AdminPortal/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path='/about' element={<About/>}/>
 
           <Route path="/faculty" element={<PageWrapper><Faculty /></PageWrapper>}>
             <Route path="cse" element={<CSE />} />

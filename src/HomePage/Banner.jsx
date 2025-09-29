@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -63,11 +64,10 @@ const Banner = () => {
         {images.map((src, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-all duration-1000 ease-out ${
-              index === currentSlide 
-                ? 'opacity-100 scale-100' 
+            className={`absolute inset-0 transition-all duration-1000 ease-out ${index === currentSlide
+                ? 'opacity-100 scale-100'
                 : 'opacity-0 scale-105'
-            }`}
+              }`}
           >
             <img
               src={src}
@@ -77,24 +77,23 @@ const Banner = () => {
             {/* Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-           
+
           </div>
         ))}
       </div>
 
-    
+
 
       {/* Main Content */}
       <div className="relative z-20 h-full flex items-center">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl">
-          
+
             {/* Main Title */}
             <div className="mb-6 overflow-hidden">
-              <h1 
-                className={`text-4xl md:text-7xl font-bold leading-tight transform transition-all duration-1000 delay-300 ${
-                  currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                }`}
+              <h1
+                className={`text-4xl md:text-7xl font-bold leading-tight transform transition-all duration-1000 delay-300 ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                  }`}
               >
                 <span className="bg-gradient-to-r from-white via-green-50 to-green-50 bg-clip-text text-transparent">
                   {slides[currentSlide].title}
@@ -104,23 +103,23 @@ const Banner = () => {
 
             {/* Description */}
             <div className="mb-8 overflow-hidden">
-              <p 
-                className={`text-sm md:text-xl text-gray-200 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-500 ${
-                  currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-                }`}
+              <p
+                className={`text-sm md:text-xl text-gray-200 max-w-2xl leading-relaxed transform transition-all duration-1000 delay-500 ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                  }`}
               >
                 {slides[currentSlide].description}
               </p>
             </div>
 
             {/* Call to Action Buttons */}
-            <div className={`flex flex-wrap gap-4 transform transition-all duration-1000 delay-700 ${
-              currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-            }`}>
-              
-              <button className="px-4 py-2 md:px-7 md:py-3 md:text-lg border-2 border-white/30 text-white text-sm font-semibold rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105">
-                Learn More
-              </button>
+            <div className={`flex flex-wrap gap-4 transform transition-all duration-1000 delay-700 ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+              }`}>
+
+              <Link to={'/about'}>
+                <button className="px-4 py-2 md:px-7 md:py-3 md:text-lg border-2 border-white/30 text-white text-sm font-semibold rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105">
+                  Learn More
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -147,14 +146,14 @@ const Banner = () => {
 
       {/* Bottom Controls */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-6">
-       
+
 
         {/* Progress Bar */}
         <div className="w-12 md:w-32 h-1 bg-white/20 rounded-full overflow-hidden">
-          <div 
+          <div
             className="h-full  bg-white/80 rounded-full transition-all duration-300"
-            style={{ 
-              width: `${((currentSlide + 1) / images.length) * 100}%` 
+            style={{
+              width: `${((currentSlide + 1) / images.length) * 100}%`
             }}
           />
         </div>

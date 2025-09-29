@@ -310,7 +310,7 @@ const Home = () => {
 
   return (
     <div>
-    
+
       <Banner />
       <Chatbot></Chatbot>
       <section ref={sectionRef} className="bg-gray-100 py-16 px-4 lg:relative">
@@ -328,14 +328,16 @@ const Home = () => {
 
             <div ref={buttonRef} className="flex justify-start mb-10 md:mt-4 mt-8 stagger-animate">
               <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <button
-                  className="group relative rounded-xl bg-gradient-to-r from-[#023020] to-[#034830] text-base sm:text-lg font-semibold px-6 sm:px-12 py-2 text-white hover:text-black transition-colors duration-300 overflow-hidden"
-                >
-                  <span className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                  <span className="relative z-10 flex items-center gap-2">
-                    Learn more <span>➝</span>
-                  </span>
-                </button>
+                <Link to={'/about'}>
+                  <button
+                    className="group relative rounded-xl bg-gradient-to-r from-[#023020] to-[#034830] text-base sm:text-lg font-semibold px-6 sm:px-12 py-2 text-white hover:text-black transition-colors duration-300 overflow-hidden"
+                  >
+                    <span className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    <span className="relative z-10 flex items-center gap-2">
+                      Learn more <span>➝</span>
+                    </span>
+                  </button>
+                </Link>
               </motion.a>
             </div>
           </div>
