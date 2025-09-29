@@ -133,41 +133,48 @@ const ResultAnalytics = ({ result }) => {
       </text>
     );
   };
-
+  // 111111111
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 py-12">
-      <div className="container mx-auto px-6 py-12 max-w-7xl">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 py-6 sm:py-8">
+      <div className="container mx-auto px-3 sm:px-5 lg:px-8 max-w-6xl ">
+
         {/* Header Section */}
-        <div className="bg-amber-50/90  rounded-3xl shadow-xl p-8 mb-8 border border-gray-100">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">{student.name}</h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-gray-700">
-                <div className="flex items-center space-x-2">
+        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border border-gray-100">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6">
+
+            {/* Student Info */}
+            <div className="space-y-3">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+                {student.name}
+              </h1>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-gray-700">
+                <div className="flex items-center gap-2">
                   <span className="font-semibold text-blue-600">ID:</span>
                   <span className="font-mono">{student.id}</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <span className="font-semibold text-purple-600">Department:</span>
                   <span>{student.department}</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <span className="font-semibold text-indigo-600">Degree:</span>
                   <span>{student.degree}</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <span className="font-semibold text-green-600">Semester:</span>
                   <span>{student.semester}</span>
                 </div>
               </div>
             </div>
+
+            {/* Stats Cards */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                <div className="text-3xl font-bold">{cgpa.toFixed(2)}</div>
+              <div className="flex-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-2xl p-4 sm:p-6 text-center shadow-lg">
+                <div className="text-2xl sm:text-3xl font-bold">{cgpa.toFixed(2)}</div>
                 <div className="text-sm opacity-90">Current CGPA</div>
               </div>
-              <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                <div className="text-3xl font-bold">{credit}</div>
+              <div className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-4 sm:p-6 text-center shadow-lg">
+                <div className="text-2xl sm:text-3xl font-bold">{credit}</div>
                 <div className="text-sm opacity-90">Total Credits</div>
               </div>
             </div>
@@ -175,24 +182,19 @@ const ResultAnalytics = ({ result }) => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
+
           {/* GPA Trend Chart */}
-          <div className="lg:col-span-2 bg-amber-50/90 rounded-3xl shadow-xl p-8 border border-gray-100">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-              <div className="w-1 h-8 bg-blue-500 rounded-full mr-4"></div>
+          <div className="lg:col-span-2 bg-amber-50/90 rounded-3xl shadow-xl p-6 sm:p-8 border border-gray-100">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 flex items-center">
+              <div className="w-1 h-6 sm:h-8 bg-blue-500 rounded-full mr-3 sm:mr-4"></div>
               Academic Performance Trend
             </h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-72 md:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={semesterData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis
-                    dataKey="name"
-                    tick={{ fontSize: 12 }}
-                    angle={-45}
-                    textAnchor="end"
-                    height={60}
-                  />
+                  <XAxis dataKey="name" tick={{ fontSize: 12 }} angle={-30} textAnchor="end" height={50} />
                   <YAxis tick={{ fontSize: 12 }} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
@@ -201,8 +203,8 @@ const ResultAnalytics = ({ result }) => {
                     dataKey="gpa"
                     stroke="#3b82f6"
                     strokeWidth={3}
-                    dot={{ fill: '#3b82f6', strokeWidth: 2, r: 6 }}
-                    activeDot={{ r: 8 }}
+                    dot={{ fill: '#3b82f6', strokeWidth: 2, r: 5 }}
+                    activeDot={{ r: 7 }}
                     name="GPA"
                   />
                 </LineChart>
@@ -211,12 +213,12 @@ const ResultAnalytics = ({ result }) => {
           </div>
 
           {/* Grade Distribution */}
-          <div className="bg-amber-50/90 rounded-3xl shadow-xl p-8 border border-gray-100">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-              <div className="w-1 h-8 bg-purple-500 rounded-full mr-4"></div>
+          <div className="bg-amber-50/90 rounded-3xl shadow-xl p-6 sm:p-8 border border-gray-100">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 flex items-center">
+              <div className="w-1 h-6 sm:h-8 bg-purple-500 rounded-full mr-3 sm:mr-4"></div>
               Grade Distribution
             </h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-72 md:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -234,13 +236,7 @@ const ResultAnalytics = ({ result }) => {
                     ))}
                   </Pie>
                   <Tooltip content={<CustomTooltip />} />
-                  <Legend
-                    verticalAlign="bottom"
-                    height={36}
-                    formatter={(value, entry) => (
-                      <span style={{ color: entry.color }}>{value}</span>
-                    )}
-                  />
+                  <Legend verticalAlign="bottom" height={36} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -248,50 +244,39 @@ const ResultAnalytics = ({ result }) => {
         </div>
 
         {/* Credits Bar Chart */}
-        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-8 mb-8 border border-gray-100">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-            <div className="w-1 h-8 bg-green-500 rounded-full mr-4"></div>
+        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-6 sm:p-8 mb-8 border border-gray-100">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <div className="w-1 h-6 sm:h-8 bg-green-500 rounded-full mr-3 sm:mr-4"></div>
             Credit Distribution by Semester
           </h3>
-          <div className="h-80">
+          <div className="h-64 sm:h-72 md:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={semesterData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis
-                  dataKey="name"
-                  tick={{ fontSize: 12 }}
-                  angle={-45}
-                  textAnchor="end"
-                  height={60}
-                />
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} angle={-30} textAnchor="end" height={50} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip content={<CustomTooltip />} />
                 <Legend />
-                <Bar
-                  dataKey="credits"
-                  fill="#22c55e"
-                  name="Credits"
-                  radius={[4, 4, 0, 0]}
-                />
+                <Bar dataKey="credits" fill="#22c55e" name="Credits" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Semester Details */}
-        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-8 border border-gray-100">
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 flex items-center">
-            <div className="w-1 h-8 bg-indigo-500 rounded-full mr-4"></div>
+        <div className="bg-amber-50/90 rounded-3xl shadow-xl p-6 sm:p-8 border border-gray-100">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <div className="w-1 h-6 sm:h-8 bg-indigo-500 rounded-full mr-3 sm:mr-4"></div>
             Detailed Semester Breakdown
           </h3>
 
-          {/* Semester Tabs */}
-          <div className="mb-8">
+          {/* Tabs */}
+          <div className="mb-6 sm:mb-8">
             <div className="flex flex-wrap gap-2 p-2 bg-gray-100 rounded-2xl">
               {semesterList.map((sem, i) => (
                 <button
                   key={sem.name}
-                  className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${selectedSemesterIndex === i
+                  className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-200 ${selectedSemesterIndex === i
                       ? "bg-amber-50/90 text-blue-600 shadow-md transform scale-105"
                       : "text-gray-600 hover:text-blue-600 hover:bg-white/50"
                     }`}
@@ -304,21 +289,25 @@ const ResultAnalytics = ({ result }) => {
           </div>
 
           {/* Semester Summary */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 sm:p-6 border border-blue-200">
+              <div className="text-xl sm:text-2xl font-bold text-blue-600">
                 {semesterList[selectedSemesterIndex]?.gpa}
               </div>
               <div className="text-sm text-blue-500">Semester GPA</div>
             </div>
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200">
-              <div className="text-2xl font-bold text-green-600">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-4 sm:p-6 border border-green-200">
+              <div className="text-xl sm:text-2xl font-bold text-green-600">
                 {semesterList[selectedSemesterIndex]?.credit}
               </div>
               <div className="text-sm text-green-500">Credits Earned</div>
             </div>
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200">
-              <div className={`inline-block px-4 py-2 rounded-full text-lg font-bold ${getGradeColor(semesterList[selectedSemesterIndex]?.grade)}`}>
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-4 sm:p-6 border border-purple-200">
+              <div
+                className={`inline-block px-3 sm:px-4 py-1 sm:py-2 rounded-full text-base sm:text-lg font-bold ${getGradeColor(
+                  semesterList[selectedSemesterIndex]?.grade
+                )}`}
+              >
                 {semesterList[selectedSemesterIndex]?.grade}
               </div>
               <div className="text-sm text-purple-500 mt-2">Letter Grade</div>
@@ -327,28 +316,36 @@ const ResultAnalytics = ({ result }) => {
 
           {/* Course Table */}
           <div className="overflow-x-auto rounded-2xl border border-gray-200">
-            <table className="w-full">
+            <table className="w-full text-sm sm:text-base">
               <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Course Code</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Course Title</th>
-                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Grade</th>
-                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">GPA</th>
-                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Credits</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-gray-700">Course Code</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-gray-700">Course Title</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-center font-semibold text-gray-700">Grade</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-center font-semibold text-gray-700">GPA</th>
+                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-center font-semibold text-gray-700">Credits</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {semesterList[selectedSemesterIndex]?.courses.map((course, index) => (
-                  <tr key={course.course_code} className={`transition-colors duration-200 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50`}>
-                    <td className="px-6 py-4 text-sm font-mono text-gray-800">{course.course_code}</td>
-                    <td className="px-6 py-4 text-sm text-gray-800 font-medium">{course.course_title}</td>
-                    <td className="px-6 py-4 text-center">
-                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-bold ${getGradeColor(course.grade)}`}>
+                  <tr
+                    key={course.course_code}
+                    className={`transition-colors duration-200 ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                      } hover:bg-blue-50`}
+                  >
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 font-mono text-gray-800">{course.course_code}</td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 font-medium text-gray-800">{course.course_title}</td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-center">
+                      <span
+                        className={`inline-block px-2 sm:px-3 py-1 rounded-full font-bold ${getGradeColor(
+                          course.grade
+                        )}`}
+                      >
                         {course.grade}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center text-sm font-semibold text-gray-800">{course.gpa}</td>
-                    <td className="px-6 py-4 text-center text-sm font-semibold text-gray-800">{course.credit}</td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-center font-semibold text-gray-800">{course.gpa}</td>
+                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-center font-semibold text-gray-800">{course.credit}</td>
                   </tr>
                 ))}
               </tbody>
@@ -357,69 +354,80 @@ const ResultAnalytics = ({ result }) => {
         </div>
       </div>
     </div>
+
   );
 };
 
 export default function ResultAnalyticsWrapper() {
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); const { user } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+  const { user, setCGPA, CGPA, Credit, setCredit } = useContext(AuthContext);
 
   const [currentStudent, setCurrentStudent] = useState([]);
 
- useEffect(() => {
-  // First fetch: get current student profile by email
-  if (!user?.email) return;
+  useEffect(() => {
+    // First fetch: get current student profile by email
+    if (!user?.email) return;
 
-  axios.get(`https://server-lu.vercel.app/users/profileDetails/${user.email}`)
-    .then((res) => {
-      setCurrentStudent(res.data);
-      console.log('Student Now', res.data);
+    axios.get(`https://server-lu.vercel.app/users/profileDetails/${user.email}`)
+      .then((res) => {
+        setCurrentStudent(res.data);
+        console.log('Student Now', res.data);
+      })
+      .catch((err) => {
+        setError("Failed to load profile details.");
+        setLoading(false);
+      });
+  }, [user?.email]);
+
+  // Second fetch: get results using currentStudent info
+  useEffect(() => {
+    if (!currentStudent?.stdId || !currentStudent?.DOB) return;
+
+    const apiUrl = "https://www.lus.ac.bd/wp-admin/admin-ajax.php";
+
+    const formBody = new URLSearchParams({
+      action: "get-result",
+      student_id: `${currentStudent.stdId}`,
+      birth_date: `${currentStudent.DOB}`,
+    }).toString();
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formBody,
+      credentials: "include",
     })
-    .catch((err) => {
-      setError("Failed to load profile details.");
-      setLoading(false);
-    });
-}, [user?.email]);
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not OK");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success) {
+          setResultData(data);
 
-// Second fetch: get results using currentStudent info
-useEffect(() => {
-  if (!currentStudent?.stdId || !currentStudent?.DOB) return;
+          // ✅ Save CGPA in AuthContext
+          if (data.student?.cgpa) {
+            setCGPA(data.student.cgpa);
+            setCredit(data.student.credit)
+            console.log("CGPA saved in AuthContext:", data.student.cgpa);
+            console.log("Credit saved in AuthContext:", data.student.credit);
+          }
+        } else {
+          throw new Error("API returned unsuccessful response");
+        }
+      })
+      .catch((err) => {
+        setError(err.message || "Failed to fetch result.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [currentStudent?.stdId, currentStudent?.DOB, setCGPA, setCredit]);
 
-  const apiUrl = "https://www.lus.ac.bd/wp-admin/admin-ajax.php";
-
-  const formBody = new URLSearchParams({
-    action: "get-result",
-    student_id: `${currentStudent.stdId}`,
-    birth_date: `${currentStudent.DOB}`,
-  }).toString();
-
-  fetch(apiUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: formBody,
-    credentials: "include",
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error("Network response was not OK");
-      return res.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        setResultData(data);
-      } else {
-        throw new Error("API returned unsuccessful response");
-      }
-    })
-    .catch((err) => {
-      setError(err.message || "Failed to fetch result.");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-}, [currentStudent?.stdId, currentStudent?.DOB]);
 
 
   if (loading)

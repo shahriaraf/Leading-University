@@ -1,4 +1,3 @@
-// src/components/Register.jsx
 import './Register.css';
 import { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
@@ -17,10 +16,12 @@ const Register = () => {
     const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false); // 👈 local loading state
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true); // 👈 show spinner
         const form = e.target;
 
         const name = form.name.value;
@@ -33,6 +34,7 @@ const Register = () => {
 
         if (!imageFile) {
             toast.error('Please upload a profile image');
+            setIsSubmitting(false);
             return;
         }
 
@@ -48,6 +50,7 @@ const Register = () => {
 
             if (!imageData.success) {
                 toast.error('Image upload failed');
+                setIsSubmitting(false);
                 return;
             }
 
@@ -80,6 +83,8 @@ const Register = () => {
         } catch (err) {
             console.error('Registration error:', err.message);
             toast.error(err.message || 'Registration Error');
+        } finally {
+            setIsSubmitting(false); // 👈 hide spinner
         }
     };
 
@@ -103,6 +108,23 @@ const Register = () => {
         typeAll();
         return () => clearTimeout(typingTimer);
     }, []);
+
+    // 👇 Custom Spinner Component
+    const Spinner = () => (
+        <div className="flex justify-center items-center h-screen bg-black bg-opacity-60">
+            <div className="relative w-20 h-20">
+                {/* Outer gradient ring */}
+                <div className="absolute inset-0 border-4 border-transparent rounded-full animate-spin border-t-blue-500 border-r-purple-500"></div>
+                {/* Inner glowing ring */}
+                <div className="absolute inset-4 border-4 border-dashed border-white rounded-full animate-[spin_3s_linear_infinite]"></div>
+            </div>
+        </div>
+    );
+
+    // 👇 Show spinner when submitting
+    if (isSubmitting) {
+        return <Spinner />;
+    }
 
     return (
         <div className="loginbg">
@@ -176,21 +198,21 @@ const Register = () => {
                                             <select
                                                 name="department"
                                                 required
-                                                className="select w-full bg-transparent bg-opacity-10 text-black"
+                                                className="select w-full bg-transparent bg-opacity-10 text-gray-400"
                                             >
                                                 <option disabled selected>
                                                     Select your Department
                                                 </option>
-                                                <option>Computer Science and Engineering</option>
-                                                <option>Electrical and Electronic Engineering</option>
-                                                <option>Civil Engineering</option>
-                                                <option>Business Administration</option>
-                                                <option>Architecture</option>
-                                                <option>Tourism and Hospitality Management</option>
-                                                <option>Islamic Studies</option>
-                                                <option>English</option>
-                                                <option>Public Health</option>
-                                                <option>Law</option>
+                                                <option className='text-black'>Computer Science and Engineering</option>
+                                                <option className='text-black' >Electrical and Electronic Engineering</option>
+                                                <option className='text-black'>Civil Engineering</option>
+                                                <option className='text-black'>Business Administration</option>
+                                                <option className='text-black'>Architecture</option>
+                                                <option className='text-black'>Tourism and Hospitality Management</option>
+                                                <option className='text-black'>Islamic Studies</option>
+                                                <option className='text-black'>English</option>
+                                                <option className='text-black'>Public Health</option>
+                                                <option className='text-black'>Law</option>
                                             </select>
                                         </div>
                                         <div className="w-full">
@@ -200,7 +222,7 @@ const Register = () => {
                                                 name="DOB"
                                                 required
                                                 aria-label="Date of Birth"
-                                                className="input input-bordered w-full bg-transparent bg-opacity-10 text-white"
+                                                className="input input-bordered w-full bg-transparent bg-opacity-10 text-gray-400"
                                             />
                                         </div>
                                     </div>

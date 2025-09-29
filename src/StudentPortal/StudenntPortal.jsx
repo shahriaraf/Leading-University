@@ -21,7 +21,7 @@ import { AuthContext } from '../AuthProvider';
 import axios from 'axios';
 import StudentProfile from '../StudentProfile/StudentProfile';
 import { useNavigate } from 'react-router-dom';
-import AddCourse from '../Admin Portal/AddCourse';
+
 
 
 const StudentPortal = () => {
@@ -31,6 +31,7 @@ const StudentPortal = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const [cgpa, setCgpa] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!user?.email) return;
@@ -55,6 +56,7 @@ const StudentPortal = () => {
     userLogOut()
       .then(result => {
         console.log('Successfully logged out', result)
+        navigate('/')
       })
       .catch(error =>
         console.log("ERROR", error)
@@ -69,14 +71,29 @@ const StudentPortal = () => {
         return <Result setCgpa={setCgpa} />;
       case 'analytics':
         return <ResultAnalyticsWrapper />;
-      case 'addcourse':
-        return <AddCourse></AddCourse>;
+    
       case 'routine':
         return <div>Routine Placeholder</div>; // Replace with actual component
       default:
         return <Result />;
     }
   };
+
+  const Spinner = () => (
+        <div className="flex justify-center items-center h-screen bg-black bg-opacity-60">
+            <div className="relative w-20 h-20">
+                {/* Outer gradient ring */}
+                <div className="absolute inset-0 border-4 border-transparent rounded-full animate-spin border-t-blue-500 border-r-purple-500"></div>
+                {/* Inner glowing ring */}
+                <div className="absolute inset-4 border-4 border-dashed border-white rounded-full animate-[spin_3s_linear_infinite]"></div>
+            </div>
+        </div>
+    );
+
+    // 👇 Show spinner when submitting
+    if (isSubmitting) {
+        return <Spinner />;
+    }
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -112,8 +129,8 @@ const StudentPortal = () => {
             { icon: <User />, label: 'Student Profile', key: 'profile' },
             { icon: <ClipboardList />, label: 'Results', key: 'results' },
             { icon: <TrendingUp />, label: 'Result Analytics', key: 'analytics' },
-            { icon: <Calendar />, label: 'Class Routine', key: 'routine' },
-            { icon: <ListPlus />, label: 'Add Course', key: 'addcourse' }
+            // { icon: <Calendar />, label: 'Class Routine', key: 'routine' },
+           
           ].map(item => (
             <motion.button
               key={item.key}

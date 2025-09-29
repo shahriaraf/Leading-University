@@ -8,6 +8,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const { user, userLogOut } = useContext(AuthContext);
 
+  
+
   const HandleLogout = () => {
     userLogOut()
       .then(result => {
@@ -84,12 +86,12 @@ const Navbar = () => {
                   <Link to={'/dashboard'}>
                     <li>
                       <a className="justify-between">
-                        Dashboard
-                        <span className="badge">New</span>
+                        Student Portal
+                        
                       </a>
                     </li>
                   </Link>
-                  <li><a>Settings</a></li>
+                 
                   <li onClick={HandleLogout}><a>Logout</a></li>
                 </ul>
               </div>
@@ -117,7 +119,9 @@ const Navbar = () => {
 
               <>
                 <ul>
-                  <li><Link to={'/dashboard'}>Dashboard</Link></li>
+                  <li><Link to={'/dashboard'}>
+                  Student Portal
+                  </Link></li>
                   <li onClick={HandleLogout}><a>Logout</a></li>
                 </ul>
               </>
