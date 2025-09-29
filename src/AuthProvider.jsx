@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [CGPA , setCGPA] = useState(null)
+    const [Credit , setCredit] = useState(null)
 
 
     const createUser = (email, password) => {
@@ -58,7 +59,9 @@ const AuthProvider = ({ children }) => {
         userLogOut,
         UserLogIn,
         CGPA,
-        setCGPA
+        setCGPA,
+        Credit,
+        setCredit
 
     }
     return (

@@ -7,7 +7,7 @@ import { AuthContext } from '../AuthProvider';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-    const fullTitle = 'Leading University — Where Futures Begin';
+    const fullTitle = 'Leeading University — Where Futures Begin';
     const fullSubtitle = 'Promise To Lead';
 
     const [title, setTitle] = useState('');

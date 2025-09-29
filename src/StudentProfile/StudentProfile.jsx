@@ -26,7 +26,9 @@ const StudentProfile = () => {
   const avatarRef = useRef(null);
   const controls = useAnimation();
   const [studentData, setStudentData] = useState([])
-  const {user} = useContext(AuthContext)
+  const {user , CGPA , Credit} = useContext(AuthContext)
+
+  console.log("CG",CGPA)
 
   useEffect(() => {
     // First fetch: get current student profile by email
@@ -74,8 +76,8 @@ const StudentProfile = () => {
     phone: "+880 1234-567890",
     address: "Dhaka, Bangladesh",
     semester: "8th",
-    cgpa: "3.75",
-    totalCredits: "140",
+    cgpa: CGPA,
+    totalCredits: Credit,
     year: "4th Year"
   };
 
@@ -210,12 +212,12 @@ const StudentProfile = () => {
               >
                 {studentData.stdId}
               </motion.p>
-              <motion.p
+              {/* <motion.p
                 variants={itemVariants}
                 className="text-gray-600 mb-6"
               >
                 {additionalInfo.year} • {additionalInfo.semester} Semester
-              </motion.p>
+              </motion.p> */}
 
               {/* Quick Stats */}
               <motion.div
